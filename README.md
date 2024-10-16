@@ -1,3 +1,5 @@
+Demo of Clay using "Clay Engine" library from https://github.com/VadimEngine/ClayEngine
+
 
 - To build (outputs to `/build` directory):
     - `cmake -S . -B build`
