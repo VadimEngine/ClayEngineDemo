@@ -15,7 +15,7 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 # Link ClayEngine
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    ${CMAKE_SOURCE_DIR}/../ClayEngine/build/Debug/ClayEngine.lib
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/build/Debug/ClayEngine.lib
 )
 
 # Include ClayEngine headers
@@ -23,15 +23,17 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     # source code
     ${CMAKE_SOURCE_DIR}/src
     # ClayEngine
-    ${CMAKE_SOURCE_DIR}/../ClayEngine/include
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/include
     # third party
-    ${CMAKE_SOURCE_DIR}/../ClayEngine/ThirdParty/assimp/include
-    ${CMAKE_SOURCE_DIR}/../ClayEngine/ThirdParty/freetype/include
-    ${CMAKE_SOURCE_DIR}/../ClayEngine/ThirdParty/GLEW/include
-    ${CMAKE_SOURCE_DIR}/../ClayEngine/ThirdParty/GLFW/include
-    ${CMAKE_SOURCE_DIR}/../ClayEngine/ThirdParty/glm
-    ${CMAKE_SOURCE_DIR}/../ClayEngine/ThirdParty/imgui
-    ${CMAKE_SOURCE_DIR}/../ClayEngine/ThirdParty/openAL/include
-    ${CMAKE_SOURCE_DIR}/../ClayEngine/ThirdParty/sndfile/include
-    ${CMAKE_SOURCE_DIR}/../ClayEngine/ThirdParty/SOIL/include
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/ThirdParty/assimp/include
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/ThirdParty/freetype/include
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/ThirdParty/glew-cmake/include
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/ThirdParty/glfw/include
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/ThirdParty/glm
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/ThirdParty/glm/backends
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/ThirdParty/imgui
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/ThirdParty/imgui/backends
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/ThirdParty/openal-soft/include
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/ThirdParty/libsndfile/include
+    ${CMAKE_SOURCE_DIR}/ThirdParty/clay/ThirdParty/soil/inc/SOIL
 )
