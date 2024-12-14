@@ -1,4 +1,4 @@
-Demo of Clay using "Clay Engine" library from https://github.com/VadimEngine/ClayEngine
+Demo of Clay using "Clay Engine" library from https://github.com/VadimEngine/ClayEngine.  Works on windows and Linux (Tested on Arch and Fedora)
 
 # Instructions
 - To build (outputs to `/build` directory):
