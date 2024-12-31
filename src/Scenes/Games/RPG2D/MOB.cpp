@@ -1,7 +1,6 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
-#include <Clay/Application/Scene.h>
+#include <clay/application/App.h>
+#include <clay/application/Scene.h>
 // class
 #include "Scenes/Games/RPG2D/MOB.h"
 

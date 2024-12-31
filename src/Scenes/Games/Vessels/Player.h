@@ -2,7 +2,7 @@
 // standard lib
 #include <string>
 // ClayEngine
-#include <Clay/Entity/Entity.h>
+#include <clay/entity/Entity.h>
 
 namespace vessels {
 

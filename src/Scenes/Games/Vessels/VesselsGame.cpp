@@ -1,6 +1,5 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
+#include <clay/application/App.h>
 // project
 #include "Scenes/Games/Vessels/VesselsScene.h"
 // class
@@ -15,7 +14,7 @@ VesselsGame::VesselsGame(VesselsScene& scene)
     mpPlayer_ = std::make_unique<Player>(*this);
     mpPlayer_->addRenderable(new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("Cube"),
-        mScene_.getApp().getResources().getResource<clay::Shader>("Assimp")
+        mScene_.getApp().getResources().getResource<clay::ShaderProgram>("Assimp")
     ));
     mpPlayer_->setPosition({0.f,.5f,0.f});
 
@@ -24,7 +23,7 @@ VesselsGame::VesselsGame(VesselsScene& scene)
         std::unique_ptr<clay::Entity> floorEntity = std::make_unique<clay::Entity>(mScene_);
         clay::ModelRenderable* floorRenderable = floorEntity->addRenderable<clay::ModelRenderable>();
         floorRenderable->setModel(mScene_.getResources().getResource<clay::Model>("RectPlane"));
-        floorRenderable->setShader(mScene_.getApp().getResources().getResource<clay::Shader>("Assimp"));
+        floorRenderable->setShader(mScene_.getApp().getResources().getResource<clay::ShaderProgram>("Assimp"));
         // Plane Renderable properties
         floorRenderable->setRotation({-90, 0, 0});
         floorRenderable->setScale({10, 10, 0});

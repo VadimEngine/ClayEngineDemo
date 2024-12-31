@@ -1,6 +1,5 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
+#include <clay/application/App.h>
 // class
 #include "Scenes/Lighting/LightingScene.h"
 
@@ -27,7 +26,7 @@ LightingScene::LightingScene(clay::App& theApp)
         std::unique_ptr<clay::Entity> assimpEntity = std::make_unique<clay::Entity>(*this);
         clay::ModelRenderable* assimpRenderable = assimpEntity->addRenderable<clay::ModelRenderable>();
         assimpRenderable->setModel(mResources_.getResource<clay::Model>("Cube"));
-        assimpRenderable->setShader(getApp().getResources().getResource<clay::Shader>("AssimpLight"));
+        assimpRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("AssimpLight"));
 
         assimpEntity->setPosition({1.f, 0.f, 0.f});
         mEntities_.push_back(std::move(assimpEntity));
@@ -37,7 +36,7 @@ LightingScene::LightingScene(clay::App& theApp)
         std::unique_ptr<clay::Entity> assimpEntity = std::make_unique<clay::Entity>(*this);
         clay::ModelRenderable* assimpRenderable = assimpEntity->addRenderable<clay::ModelRenderable>();
         assimpRenderable->setModel(mResources_.getResource<clay::Model>("Cube"));
-        assimpRenderable->setShader(getApp().getResources().getResource<clay::Shader>("AssimpLight"));
+        assimpRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("AssimpLight"));
 
         assimpEntity->setPosition({-1.f, 0.f, 0.f});
         mEntities_.push_back(std::move(assimpEntity));

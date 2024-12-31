@@ -5,10 +5,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 // ClayEngine
-#include <Clay/Application/CameraController.h>
-#include <Clay/Application/Scene.h>
-#include <Clay/Entity/Physics/RigidBodyComponent.h>
-#include <Clay/Entity/Render/ModelRenderable.h>
+#include <clay/application/CameraController.h>
+#include <clay/application/Scene.h>
+#include <clay/entity/physics/RigidBodyComponent.h>
+#include <clay/entity/render/ModelRenderable.h>
 // project
 #include "Scenes/PhysicsScene/PhysicsSceneGUI.h"
 

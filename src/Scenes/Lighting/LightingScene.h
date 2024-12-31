@@ -1,9 +1,8 @@
 #pragma once
-// project
 // ClayEngine
-#include <Clay/Application/CameraController.h>
-#include <Clay/Application/Scene.h>
-#include <Clay/Graphics/LightSource.h>
+#include <clay/application/CameraController.h>
+#include <clay/application/Scene.h>
+#include <clay/graphics/common/LightSource.h>
 // project
 #include "Scenes/Lighting/LightEntity.h"
 #include "Scenes/Lighting/LightingSceneGUI.h"

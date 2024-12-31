@@ -1,8 +1,8 @@
 #pragma once
 // ClayEngine
-#include <Clay/Entity/Entity.h>
-#include <Clay/Entity/Render/ModelRenderable.h>
-#include <Clay/Graphics/LightSource.h>
+#include <clay/entity/Entity.h>
+#include <clay/entity/render/ModelRenderable.h>
+#include <clay/graphics/common/LightSource.h>
 
 namespace galaxy {
 class SunEntity : public clay::Entity {

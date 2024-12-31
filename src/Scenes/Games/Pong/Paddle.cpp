@@ -1,6 +1,5 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
+#include <clay/application/App.h>
 // project
 #include "Scenes/Games/Pong/PongScene.h"
 // class
@@ -11,7 +10,7 @@ Paddle::Paddle(clay::Scene& scene, glm::vec2 dimension)
 : clay::Entity(scene) {
     addRenderable(new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("RectPlane"),
-        mScene_.getApp().getResources().getResource<clay::Shader>("Assimp")
+        mScene_.getApp().getResources().getResource<clay::ShaderProgram>("Assimp")
     ));
     setPosition(mDefaultPos_);
     setScale({dimension.x, dimension.y, 1});

@@ -1,10 +1,10 @@
  #pragma once
 // ClayEngine
-#include <Clay/Application/CameraController.h>
-#include <Clay/Application/Resource.h>
-#include <Clay/Application/Scene.h>
-#include <Clay/Entity/Entity.h>
-#include <Clay/Entity/Render/ModelRenderable.h>
+#include <clay/application/CameraController.h>
+#include <clay/application/Resource.h>
+#include <clay/application/Scene.h>
+#include <clay/entity/Entity.h>
+#include <clay/entity/render/ModelRenderable.h>
 // project
 #include "Scenes/Galaxy/GalaxySceneGUI.h"
 #include "Scenes/Galaxy/MoonEntity.h"

@@ -1,6 +1,5 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
+#include <clay/application/App.h>
 // class
 #include "Scenes/Lighting/LightEntity.h"
 
@@ -9,7 +8,7 @@ LightEntity::LightEntity(clay::Scene& scene)
 : clay::Entity(scene), mLightSource_(clay::LightSource::Type::Point) {
     mpRenderable_ = new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("Sphere"),
-        mScene_.getApp().getResources().getResource<clay::Shader>("Assimp")
+        mScene_.getApp().getResources().getResource<clay::ShaderProgram>("Assimp")
     );
     addRenderable(mpRenderable_);
 }

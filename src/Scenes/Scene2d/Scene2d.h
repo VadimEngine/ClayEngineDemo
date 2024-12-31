@@ -1,11 +1,11 @@
 #pragma once
 // ClayEngine
-#include <Clay/Application/CameraController.h>
-#include <Clay/Application/Scene.h>
-#include <Clay/Entity/Render/TextRenderable.h>
-#include <Clay/Graphics/Shader.h>
-#include <Clay/Graphics/SpriteSheet.h>
-#include <Clay/Graphics/Texture.h>
+#include <clay/application/CameraController.h>
+#include <clay/application/Scene.h>
+#include <clay/entity/Render/TextRenderable.h>
+#include <clay/graphics/common/ShaderProgram.h>
+#include <clay/graphics/common/SpriteSheet.h>
+#include <clay/graphics/common/Texture.h>
 // project
 #include "Scenes/Scene2d/Scene2dGUI.h"
 

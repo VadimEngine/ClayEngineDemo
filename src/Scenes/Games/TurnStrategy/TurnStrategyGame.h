@@ -2,13 +2,13 @@
 // standard lib
 #include <vector>
 // ClayEngine
-#include <Clay/Application/CameraController.h>
-#include <Clay/Application/Logger.h>
-#include <Clay/Application/Resource.h>
-#include <Clay/Entity/Render/ModelRenderable.h>
-#include <Clay/Graphics/Renderer.h>
-#include <Clay/Graphics/SpriteSheet.h>
-#include <Clay/Graphics/Texture.h>
+#include <clay/application/CameraController.h>
+#include <clay/application/Logger.h>
+#include <clay/application/Resource.h>
+#include <clay/entity/Render/ModelRenderable.h>
+#include <clay/graphics/common/Renderer.h>
+#include <clay/graphics/common/SpriteSheet.h>
+#include <clay/graphics/common/Texture.h>
 // project
 #include "Scenes/Games/TurnStrategy/Settlement.h"
 #include "Scenes/Games/TurnStrategy/TileMap.h"

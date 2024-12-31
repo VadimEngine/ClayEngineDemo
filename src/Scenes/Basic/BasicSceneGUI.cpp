@@ -1,6 +1,6 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
+#include <clay/application/App.h>
+// third party
 // project
 #include "Scenes/Basic/BasicScene.h"
 #include "Scenes/Menu/MenuScene.h"

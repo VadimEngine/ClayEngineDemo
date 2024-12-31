@@ -1,6 +1,5 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
+#include <clay/application/App.h>
 // class
 #include "Scenes/Galaxy/SunEntity.h"
 
@@ -10,7 +9,7 @@ SunEntity::SunEntity(clay::Scene& scene)
     : clay::Entity(scene), mLight_(clay::LightSource::Type::Point) {
     mpRenderable_ = new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("Sphere"),
-        mScene_.getApp().getResources().getResource<clay::Shader>("Assimp")
+        mScene_.getApp().getResources().getResource<clay::ShaderProgram>("Assimp")
     );
     mpRenderable_->setScale({mRadius_, mRadius_, mRadius_});
     mpRenderable_->setColor({10,9,0,1});

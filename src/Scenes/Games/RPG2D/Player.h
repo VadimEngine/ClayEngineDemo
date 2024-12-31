@@ -1,11 +1,11 @@
 #pragma once
 // project
-#include <Clay/Entity/Entity.h>
-#include <Clay/Entity/Physics/Collider2.h>
-#include <Clay/Entity/Render/BaseRenderable.h>
-#include <Clay/Entity/Render/SpriteRenderable.h>
-#include <Clay/Graphics/Renderer.h>
-#include <Clay/Graphics/SpriteSheet.h>
+#include <clay/entity/Entity.h>
+#include <clay/entity/Physics/Collider2.h>
+#include <clay/entity/Render/BaseRenderable.h>
+#include <clay/entity/Render/SpriteRenderable.h>
+#include <clay/graphics/common/Renderer.h>
+#include <clay/graphics/common/SpriteSheet.h>
 
 namespace rpg_2d {
 

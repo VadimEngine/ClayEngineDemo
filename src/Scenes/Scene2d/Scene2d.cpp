@@ -1,6 +1,5 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
+#include <clay/application/App.h>
 // class
 #include "Scenes/Scene2d/Scene2d.h"
 
@@ -29,7 +28,7 @@ Scene2d::Scene2d(clay::App& theApp)
     clay::Entity* theEntity3 = new clay::Entity(*this);
     theEntity3->addRenderable(new clay::ModelRenderable(
         getResources().getResource<clay::Model>("RectPlane"),
-        getApp().getResources().getResource<clay::Shader>("Assimp")
+        getApp().getResources().getResource<clay::ShaderProgram>("Assimp")
     ));
     theEntity3->setPosition({0.f, 0.f, 0.f});
     // Add white square first so its rendered behind the sprites

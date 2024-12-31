@@ -1,34 +1,21 @@
+// third party
+#include <clay/application/Logger.h>
 // class
 #include "Scenes/Games/TurnStrategy/TileMap.h"
 
 namespace turn_strategy {
+// TODO dont use a texture here since its only used to build the tile map. Unless there is plans to render this texture
 TileMap::TileMap(clay::Texture* texture, clay::SpriteSheet* spriteSheet) {
-    // Bind the texture
-    glBindTexture(GL_TEXTURE_2D, texture->getId());
-
     // Get the texture dimensions
     int width, height, channels;
-    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width);
-    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &height);
-    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_INTERNAL_FORMAT, &channels);
-
-    // Determine the number of channels
-    if (channels == GL_RGB || channels == GL_SRGB) {
-        channels = 3;
-    } else if (channels == GL_RGBA || channels == GL_SRGB_ALPHA) {
-        channels = 4;
-    } else {
-        LOG_E("Unsupported texture format: %d", channels);
-        glBindTexture(GL_TEXTURE_2D, 0);
-        return;
-    }
+    width = texture->getWidth();
+    height = texture->getHeight();
+    channels = texture->getChannels();
 
     // Allocate memory to hold the texture data
     size_t dataSize = width * height * channels;
-    std::unique_ptr<unsigned char[]> textureData = std::make_unique<unsigned char[]>(dataSize);
 
-    // Retrieve the texture data
-    glGetTexImage(GL_TEXTURE_2D, 0, (channels == 3) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, textureData.get());
+    std::vector<unsigned char> textureData = texture->getPixelData(); 
 
     // Resize the tilemap
     mTiles_.resize(height);
@@ -67,9 +54,6 @@ TileMap::TileMap(clay::Texture* texture, clay::SpriteSheet* spriteSheet) {
             }
         }
     }
-
-    // Unbind the texture
-    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 TileMap::~TileMap() {}

@@ -2,9 +2,9 @@
 // standard lib
 #include <vector>
 // ClayEngine
-#include <Clay/Application/InputHandler.h>
-#include <Clay/Application/CameraController.h>
-#include <Clay/Entity/Entity.h>
+#include <clay/application/InputHandler.h>
+#include <clay/application/CameraController.h>
+#include <clay/entity/Entity.h>
 // project
 #include "Scenes/Games/Vessels/Cosmos.h"
 #include "Scenes/Games/Vessels/Player.h"

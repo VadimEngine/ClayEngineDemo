@@ -1,6 +1,5 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h> // needed for #define GLEW_STATIC from app
+#include <clay/application/App.h>
 // project
 #include "Scenes/Games/TurnStrategy/TurnStrategyGame.h"
 // class
@@ -10,6 +9,7 @@ namespace turn_strategy {
 Unit::Unit(TurnStrategyGame& theGame, clay::SpriteSheet::Sprite* pSprite)
     : clay::Entity(theGame.getScene()), mGame_(theGame) {
     addRenderable(new clay::SpriteRenderable(pSprite));
+    mGame_.getScene().getApp();
 }
 
 void Unit::update(const float dt) {

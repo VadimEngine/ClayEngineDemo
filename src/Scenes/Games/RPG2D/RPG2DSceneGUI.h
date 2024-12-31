@@ -1,6 +1,6 @@
 #pragma once
 // ClayEngine
-#include <Clay/GUI/ImGuiComponent.h>
+#include <clay/gui/ImGuiComponent.h>
 
 namespace rpg_2d {
 // Forward declare Scene

@@ -1,6 +1,5 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
+#include <clay/Application/App.h>
 // project
 #include "Scenes/Games/Pong/PongScene.h"
 // class
@@ -11,7 +10,7 @@ Ball::Ball(clay::Scene& scene, float radius)
 : clay::Entity(scene), mRadius_(radius) {
     addRenderable(new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("CircularPlane"),
-        mScene_.getApp().getResources().getResource<clay::Shader>("Assimp")
+        mScene_.getApp().getResources().getResource<clay::ShaderProgram>("Assimp")
     ));
     mPosition_ = {0.f,0.f,0.f};
     mScale_ = {radius, radius, 1};

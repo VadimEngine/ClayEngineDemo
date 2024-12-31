@@ -1,6 +1,5 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
+#include <clay/application/App.h>
 // class
 #include "Scenes/PhysicsScene/PhysicsScene.h"
 
@@ -15,7 +14,7 @@ PhysicsScene::PhysicsScene(clay::App& theApp)
         clay::Entity* theEntity = new clay::Entity(*this);
         clay::ModelRenderable* modelRenderable = theEntity->addRenderable<clay::ModelRenderable>();
         modelRenderable->setModel(mResources_.getResource<clay::Model>("CircularPlane"));
-        modelRenderable->setShader(getApp().getResources().getResource<clay::Shader>("Assimp"));
+        modelRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("Assimp"));
         clay::RigidBodyComponent* rigid = theEntity->addPhysicsComponent<clay::RigidBodyComponent>();
         rigid->getCollider().setShape(clay::ColliderOLD::Shape::CIRCLE);
         rigid->setMobile(true);
@@ -27,7 +26,7 @@ PhysicsScene::PhysicsScene(clay::App& theApp)
         clay::Entity* theEntity = new clay::Entity(*this);
         clay::ModelRenderable* modelRenderable = theEntity->addRenderable<clay::ModelRenderable>();
         modelRenderable->setModel(mResources_.getResource<clay::Model>("RectPlane"));
-        modelRenderable->setShader(getApp().getResources().getResource<clay::Shader>("Assimp"));
+        modelRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("Assimp"));
         theEntity->setPosition({0.f, -10.f, 0.f});
         theEntity->setScale({10.f, 1.f, 1.f});
         clay::RigidBodyComponent* rigid = theEntity->addPhysicsComponent<clay::RigidBodyComponent>();
@@ -71,7 +70,7 @@ void PhysicsScene::addEntity(const glm::vec3 position) {
     newEntity->setPosition(position);
     clay::ModelRenderable* modelRenderable = newEntity->addRenderable<clay::ModelRenderable>();
     modelRenderable->setModel(mResources_.getResource<clay::Model>("CircularPlane"));
-    modelRenderable->setShader(getApp().getResources().getResource<clay::Shader>("Assimp"));
+    modelRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("Assimp"));
 
     clay::RigidBodyComponent* rigid = newEntity->addPhysicsComponent<clay::RigidBodyComponent>();
     rigid->getCollider().setShape(clay::ColliderOLD::Shape::CIRCLE);

@@ -1,6 +1,6 @@
 #pragma once
 // ClayEngine
-#include <Clay/Application/Scene.h>
+#include <clay/application/Scene.h>
 // project
 #include "Scenes/Menu/MenuGUI.h"
 

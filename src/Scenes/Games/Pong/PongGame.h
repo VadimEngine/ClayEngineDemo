@@ -7,9 +7,9 @@
 #include <glm/gtx/norm.hpp>
 #include <glm/gtx/normalize_dot.hpp>
 // ClayEngine
-#include <Clay/Application/InputHandler.h>
-#include <Clay/Entity/Render/ModelRenderable.h>
-#include <Clay/Graphics/Renderer.h>
+#include <clay/application/InputHandler.h>
+#include <clay/entity/render/ModelRenderable.h>
+#include <clay/graphics/common/Renderer.h>
 // project
 #include "Scenes/Games/Pong/Ball.h"
 #include "Scenes/Games/Pong/Paddle.h"

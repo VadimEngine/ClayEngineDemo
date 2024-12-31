@@ -4,10 +4,10 @@
 #include <string>
 #include <unordered_set>
 // ClayEngine
-#include <Clay/Entity/Entity.h>
-#include <Clay/Entity/Render/SpriteRenderable.h>
-#include <Clay/Graphics/SpriteSheet.h>
-#include <Clay/Utils/Utils.h>
+#include <clay/entity/Entity.h>
+#include <clay/entity/render/SpriteRenderable.h>
+#include <clay/graphics/common/SpriteSheet.h>
+#include <clay/utils/Utils.h>
 
 namespace turn_strategy {
 // forward declare TurnStrategyGame

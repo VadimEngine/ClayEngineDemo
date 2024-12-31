@@ -5,12 +5,15 @@ project(ClayEngineDemo)
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CLAY_ENABLE_OPENGL ON) # Enable Opengl
 
 # Collect all source files
 file(GLOB_RECURSE SRC_FILES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 
 # Add the executable
 add_executable(${PROJECT_NAME} ${SRC_FILES})
+# Define the DEMO_RESOURCE_PATH macro
+target_compile_definitions(${PROJECT_NAME} PRIVATE DEMO_RESOURCE_PATH="${CMAKE_SOURCE_DIR}/res")
 
 # Add ClayEngine as a subdirectory and link to it
 add_subdirectory(${CMAKE_SOURCE_DIR}/ThirdParty/clay clay_build)

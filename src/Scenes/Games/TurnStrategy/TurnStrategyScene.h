@@ -1,6 +1,6 @@
 #pragma once
 // ClayEngine
-#include <Clay/Application/Scene.h>
+#include <clay/application/Scene.h>
 // project
 #include "Scenes/Games/TurnStrategy/TurnStrategyGame.h"
 #include "Scenes/Games/TurnStrategy/TurnStrategyGUI.h"

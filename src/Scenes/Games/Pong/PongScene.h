@@ -1,6 +1,6 @@
 #pragma once
 // ClayEngine
-#include <Clay/Application/Scene.h>
+#include <clay/application/Scene.h>
 // project
 #include "Scenes/Games/Pong/PongGame.h"
 #include "Scenes/Games/Pong/PongSceneGUI.h"

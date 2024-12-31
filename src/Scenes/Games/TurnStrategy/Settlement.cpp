@@ -1,7 +1,6 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
-#include <Clay/Application/Scene.h>
+#include <clay/application/App.h>
+#include <clay/application/Scene.h>
 // project
 #include "Scenes/Games/TurnStrategy/TurnStrategyGame.h"
 #include "Scenes/Games/TurnStrategy/TurnStrategyScene.h"
@@ -15,12 +14,12 @@ Settlement::Settlement(TurnStrategyGame& theGame, clay::SpriteSheet::Sprite* pSp
     territoryTiles.insert(tilePosition);
 
     borderRenderable.setModel(mScene_.getResources().getResource<clay::Model>("RectPlane"));
-    borderRenderable.setShader(mScene_.getApp().getResources().getResource<clay::Shader>("Assimp"));
+    borderRenderable.setShader(mScene_.getApp().getResources().getResource<clay::ShaderProgram>("Assimp"));
     borderRenderable.setColor({1,0, 0,.5f});
 
     clay::ModelRenderable* labelRectRenderable = new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("RectPlane"),
-        mScene_.getApp().getResources().getResource<clay::Shader>("Assimp")
+        mScene_.getApp().getResources().getResource<clay::ShaderProgram>("Assimp")
     );
     labelRectRenderable->setScale({1.f, .5f, 1});
     labelRectRenderable->setColor({.3f, .3f, .3f, 1.f});

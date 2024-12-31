@@ -1,9 +1,8 @@
-// forward declare
-#include <Clay/Application/App.h>
-#include <Clay/Application/Scene.h>
+// clay engine
+#include <clay/application/App.h>
+#include <clay/application/Scene.h>
 // class
 #include "Scenes/Games/RPG2D/Player.h"
-
 
 namespace rpg_2d {
 

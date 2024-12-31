@@ -1,8 +1,8 @@
 #pragma once
 // ClayEngine
-#include <Clay/Application/CameraController.h>
-#include <Clay/Application/InputHandler.h>
-#include <Clay/Graphics/Renderer.h>
+#include <clay/application/CameraController.h>
+#include <clay/application/InputHandler.h>
+#include <clay/graphics/common/Renderer.h>
 // project
 #include "Scenes/Games/RPG2D/MOB.h"
 #include "Scenes/Games/RPG2D/Player.h"

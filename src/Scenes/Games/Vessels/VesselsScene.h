@@ -2,7 +2,7 @@
 // standard lib
 #include <memory>
 // ClayEngine
-#include <Clay/Application/Scene.h>
+#include <clay/application/Scene.h>
 // project
 #include "Scenes/Games/Vessels/VesselsGame.h"
 #include "Scenes/Games/Vessels/VesselsSceneGUI.h"

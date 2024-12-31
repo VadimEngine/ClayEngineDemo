@@ -1,6 +1,5 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
+#include <clay/application/App.h>
 // class
 #include "Scenes/Galaxy/MoonEntity.h"
 
@@ -9,7 +8,7 @@ MoonEntity::MoonEntity(clay::Scene& scene)
     : clay::Entity(scene) {
     mpRenderable_ = new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("Sphere"),
-        mScene_.getApp().getResources().getResource<clay::Shader>("AssimpLight")
+        mScene_.getApp().getResources().getResource<clay::ShaderProgram>("AssimpLight")
     );
     mpRenderable_->setScale({mRadius_, mRadius_, mRadius_});
     mpRenderable_->setColor(0x9A9A9AFF);

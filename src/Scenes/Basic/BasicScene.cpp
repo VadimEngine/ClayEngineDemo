@@ -1,6 +1,5 @@
-// forward declare
 // ClayEngine
-#include <Clay/Application/App.h>
+#include <clay/application/App.h>
 // class
 #include "Scenes/Basic/BasicScene.h"
 
@@ -25,7 +24,7 @@ BasicScene::BasicScene(clay::App& theApp)
         // Solid cube properties
         clay::ModelRenderable* solidCubeRenderable = theEntity1->addRenderable<clay::ModelRenderable>();
         solidCubeRenderable->setModel(mResources_.getResource<clay::Model>("Cube"));
-        solidCubeRenderable->setShader(getApp().getResources().getResource<clay::Shader>("Assimp"));
+        solidCubeRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("Assimp"));
 
         solidCubeRenderable->setWireframeRendering(true);
         solidCubeRenderable->setColor({.3f, .3f, .3f, 1.0f});
@@ -43,7 +42,7 @@ BasicScene::BasicScene(clay::App& theApp)
         std::unique_ptr<clay::Entity> theEntity2 = std::make_unique<clay::Entity>(*this);
         clay::ModelRenderable* textureCubeRenderable = theEntity2->addRenderable<clay::ModelRenderable>();
         textureCubeRenderable->setModel(mResources_.getResource<clay::Model>("Cube"));
-        textureCubeRenderable->setShader(getApp().getResources().getResource<clay::Shader>("MVPTexShader"));
+        textureCubeRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("MVPTexShader"));
         // Texture cube properties
         textureCubeRenderable->setTexture(
             0,
@@ -60,7 +59,7 @@ BasicScene::BasicScene(clay::App& theApp)
         std::unique_ptr<clay::Entity> floorEntity = std::make_unique<clay::Entity>(*this);
         clay::ModelRenderable* floorRenderable = floorEntity->addRenderable<clay::ModelRenderable>();
         floorRenderable->setModel(mResources_.getResource<clay::Model>("RectPlane"));
-        floorRenderable->setShader(getApp().getResources().getResource<clay::Shader>("Assimp"));
+        floorRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("Assimp"));
         // Plane Renderable properties
         floorRenderable->setRotation({-90, 0, 0});
         floorRenderable->setScale({10, 10, 0});
@@ -73,7 +72,7 @@ BasicScene::BasicScene(clay::App& theApp)
         std::unique_ptr<clay::Entity> assimpEntity = std::make_unique<clay::Entity>(*this);
         clay::ModelRenderable* assimpRenderable = assimpEntity->addRenderable<clay::ModelRenderable>();
         assimpRenderable->setModel(mResources_.getResource<clay::Model>("Sphere"));
-        assimpRenderable->setShader(getApp().getResources().getResource<clay::Shader>("Assimp"));
+        assimpRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("Assimp"));
 
         assimpEntity->setPosition({0.f, 5.f, 0.f});
         mEntities_.push_back(std::move(assimpEntity));
@@ -83,7 +82,7 @@ BasicScene::BasicScene(clay::App& theApp)
         std::unique_ptr<clay::Entity> planeTextureEntity = std::make_unique<clay::Entity>(*this);
         clay::ModelRenderable* planeTextureRenderable = planeTextureEntity->addRenderable<clay::ModelRenderable>();
         planeTextureRenderable->setModel(mResources_.getResource<clay::Model>("RectPlane"));
-        planeTextureRenderable->setShader(getApp().getResources().getResource<clay::Shader>("TextureSurface"));
+        planeTextureRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("TextureSurface"));
         // Texture. TODO allow imgui set this from list of textures
         planeTextureRenderable->setTexture(
             1,

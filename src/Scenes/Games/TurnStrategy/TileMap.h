@@ -3,11 +3,12 @@
 #include <filesystem>
 #include <vector>
 // ClayEngine
-#include <Clay/Graphics/Renderer.h>
-#include <Clay/Graphics/SpriteSheet.h>
+#include <clay/graphics/common/Renderer.h>
+#include <clay/graphics/common/SpriteSheet.h>
 
 namespace turn_strategy {
 
+// TODO MOVE TO CLAY?
 class TileMap {
 public:
     /** Struct to hold a tile type and sprite */

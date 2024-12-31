@@ -1,6 +1,6 @@
 #pragma once
 // ClayEngine
-#include <Clay/GUI/ImGuiComponent.h>
+#include <clay/gui/ImGuiComponent.h>
 
 // Forward declare Scene
 class GamesScene;

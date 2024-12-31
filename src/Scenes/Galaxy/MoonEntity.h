@@ -1,7 +1,7 @@
 #pragma once
 // ClayEngine
-#include <Clay/Entity/Entity.h>
-#include <Clay/Entity/Render/ModelRenderable.h>
+#include <clay/entity/Entity.h>
+#include <clay/entity/render/ModelRenderable.h>
 
 namespace galaxy {
 class MoonEntity : public clay::Entity {
