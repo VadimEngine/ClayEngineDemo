@@ -7,7 +7,7 @@
 #include <clay/entity/Entity.h>
 #include <clay/entity/render/SpriteRenderable.h>
 #include <clay/graphics/common/SpriteSheet.h>
-#include <clay/utils/Utils.h>
+#include <clay/utils/common/Utils.h>
 
 namespace turn_strategy {
 // forward declare TurnStrategyGame
