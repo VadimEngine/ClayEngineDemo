@@ -2,7 +2,7 @@
 // ClayEngine
 #include <clay/application/desktop/CameraController.h>
 #include <clay/application/common/BaseScene.h>
-#include <clay/entity/Render/TextRenderable.h>
+#include <clay/entity/render/TextRenderable.h>
 #include <clay/graphics/common/ShaderProgram.h>
 #include <clay/graphics/common/SpriteSheet.h>
 #include <clay/graphics/common/Texture.h>

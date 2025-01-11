@@ -188,7 +188,9 @@ void PongGame::handleEntityOverlap() {
                         }
                         // paddle-ball collision
                         if (mEntities_[i] == mBall_.get() || mEntities_[j] == mBall_.get()) {
-                            ((clay::AppDesktop&)mApp_).getAudioManger().playSound(mScene_.getApp().getResources().getResource<clay::Audio>("Blip1")->getId());
+                            if (((clay::AppDesktop&)mApp_).getAudioManger().isInitialized()) {
+                                ((clay::AppDesktop&)mApp_).getAudioManger().playSound(mScene_.getApp().getResources().getResource<clay::Audio>("Blip1")->getId());
+                            }
                             mBall_->setVelocity(
                                 glm::reflect(mBall_->getVelocity(), glm::normalize( glm::vec3{1,0,0}))
                             );

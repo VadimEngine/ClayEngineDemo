@@ -1,9 +1,9 @@
 #pragma once
 // project
 #include <clay/entity/Entity.h>
-#include <clay/entity/Physics/Collider2.h>
-#include <clay/entity/Render/BaseRenderable.h>
-#include <clay/entity/Render/SpriteRenderable.h>
+#include <clay/entity/physics/Collider2.h>
+#include <clay/entity/render/BaseRenderable.h>
+#include <clay/entity/render/SpriteRenderable.h>
 #include <clay/graphics/common/Renderer.h>
 #include <clay/graphics/common/SpriteSheet.h>
 

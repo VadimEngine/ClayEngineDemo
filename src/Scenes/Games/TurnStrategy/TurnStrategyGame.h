@@ -5,7 +5,7 @@
 #include <clay/application/desktop/CameraController.h>
 #include <clay/utils/common/Logger.h>
 #include <clay/application/common/Resources.h>
-#include <clay/entity/Render/ModelRenderable.h>
+#include <clay/entity/render/ModelRenderable.h>
 #include <clay/graphics/common/Renderer.h>
 #include <clay/graphics/common/SpriteSheet.h>
 #include <clay/graphics/common/Texture.h>
