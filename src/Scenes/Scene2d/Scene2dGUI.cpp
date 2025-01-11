@@ -1,5 +1,5 @@
-// ClayEngine
-#include <clay/application/App.h>
+// clay
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "Scenes/Menu/MenuScene.h"
 #include "Scenes/Scene2d/Scene2d.h"
@@ -10,7 +10,7 @@ namespace scene_2d {
 
 Scene2dGUI::Scene2dGUI(Scene2d& theScene)
     : mScene_(theScene) {
-    mVSyncEnabled_ = mScene_.getApp().getWindow().getGLFWSwapInterval();
+    mVSyncEnabled_ = ((clay::WindowDesktop*)mScene_.getApp().getWindow())->getGLFWSwapInterval();
     mCameraMode_ = static_cast<int>(mScene_.getFocusCamera()->getMode());
 }
 
@@ -22,14 +22,14 @@ void Scene2dGUI::buildImGui() {
     ImGui::Begin("Settings");
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(1.f, 0.f, 0.f, 0.40f));
     if (ImGui::Button("Back")) {
-        mScene_.getApp().setScene(new menu_scene::MenuScene(mScene_.getApp()));
+        mScene_.getApp().setScene(new menu_scene::MenuScene((clay::AppDesktop&)(mScene_.getApp())));
         mScene_.setRemove(true);
     }
     ImGui::PopStyleColor();
     ImGui::Text("Scene 2d");
     ImGui::Text("FPS: %.1f", double(ImGui::GetIO().Framerate));
     if (ImGui::Checkbox("vSync", &mVSyncEnabled_)) {
-        mScene_.getApp().getWindow().setVSync(mVSyncEnabled_);
+        ((clay::WindowDesktop*)(mScene_.getApp().getWindow()))->setVSync(mVSyncEnabled_);
     }
     ImGui::Separator();
     // Camera control

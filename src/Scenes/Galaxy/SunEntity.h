@@ -12,7 +12,7 @@ public:
      *
      * @param scene Scene this sun is in
      */
-    SunEntity(clay::Scene& scene);
+    SunEntity(clay::BaseScene& scene);
 
     /** Destructor */
     ~SunEntity();

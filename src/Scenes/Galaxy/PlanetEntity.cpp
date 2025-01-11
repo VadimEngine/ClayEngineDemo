@@ -1,10 +1,10 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Galaxy/PlanetEntity.h"
 
 namespace galaxy {
-PlanetEntity::PlanetEntity(clay::Scene& scene)
+PlanetEntity::PlanetEntity(clay::BaseScene& scene)
     :Entity(scene) {
     mpRenderable_ = new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("Torus"),

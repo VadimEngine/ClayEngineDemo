@@ -2,8 +2,8 @@
 // standard lib
 #include <vector>
 // ClayEngine
-#include <clay/application/InputHandler.h>
-#include <clay/application/CameraController.h>
+#include <clay/application/desktop/InputHandlerDesktop.h>
+#include <clay/application/desktop/CameraController.h>
 #include <clay/entity/Entity.h>
 // project
 #include "Scenes/Games/Vessels/Cosmos.h"
@@ -73,7 +73,7 @@ private:
 
     GameState mState_ = GameState::START;
 
-    clay::InputHandler& mInputHandler_;
+    clay::InputHandlerDesktop& mInputHandler_;
 
     clay::CameraController mCameraController_;
 

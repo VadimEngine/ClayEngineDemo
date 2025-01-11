@@ -1,7 +1,7 @@
 #pragma once
 // ClayEngine
-#include <clay/application/CameraController.h>
-#include <clay/application/Scene.h>
+#include <clay/application/desktop/CameraController.h>
+#include <clay/application/common/BaseScene.h>
 #include <clay/graphics/common/LightSource.h>
 // project
 #include "Scenes/Lighting/LightEntity.h"
@@ -10,13 +10,13 @@
 
 namespace lighting_scene {
 
-class LightingScene : public clay::Scene {
+class LightingScene : public clay::BaseScene {
 public:
     /**
      * Constructor
      * @param theApp Parent app handling this Scene
      */
-    LightingScene(clay::App& theApp);
+    LightingScene(clay::IApp& theApp);
 
     /** Destructor */
     ~LightingScene();

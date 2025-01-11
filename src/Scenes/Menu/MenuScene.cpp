@@ -1,12 +1,12 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Menu/MenuScene.h"
 
 namespace menu_scene {
 
-MenuScene::MenuScene(clay::App& theApp)
-    : clay::Scene(theApp), mGui_(*this) {}
+MenuScene::MenuScene(clay::IApp& theApp)
+    : clay::BaseScene(theApp), mGui_(*this) {}
 
 MenuScene::~MenuScene() {}
 

@@ -1,18 +1,18 @@
 #pragma once
 // ClayEngine
-#include <clay/application/Scene.h>
+#include <clay/application/common/BaseScene.h>
 // project
 #include "Scenes/Games/TurnStrategy/TurnStrategyGame.h"
 #include "Scenes/Games/TurnStrategy/TurnStrategyGUI.h"
 
 namespace turn_strategy {
-class TurnStrategyScene : public clay::Scene {
+class TurnStrategyScene : public clay::BaseScene {
 public:
     /**
      * Constructor
      * @param theApp Parent app handling this Scene
      */
-    TurnStrategyScene(clay::App& theApp);
+    TurnStrategyScene(clay::IApp& theApp);
 
     /** Destructor */
     ~TurnStrategyScene();
@@ -53,19 +53,19 @@ public:
      * On Mouse button press handler
      * @param mouseEvent Mouse event details
      */
-    void onMousePress(const clay::InputHandler::MouseEvent& mouseEvent) override;
+    void onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent) override;
 
     /**
      * On Mouse Button release handler
      * @param mouseEvent Mouse event details
      */
-    void onMouseRelease(const clay::InputHandler::MouseEvent& mouseEvent) override;
+    void onMouseRelease(const clay::IInputHandler::MouseEvent& mouseEvent) override;
 
     /**
      * On wheel handler
      * @param mouseEvent Mouse event details
      */
-    void onMouseWheel(const clay::InputHandler::MouseEvent& mouseEvent) override;
+    void onMouseWheel(const clay::IInputHandler::MouseEvent& mouseEvent) override;
 
     /** Get reference to the game handler in this scene */
     TurnStrategyGame& getGame();

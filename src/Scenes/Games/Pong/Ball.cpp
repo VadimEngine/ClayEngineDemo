@@ -1,12 +1,12 @@
 // ClayEngine
-#include <clay/Application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "Scenes/Games/Pong/PongScene.h"
 // class
 #include "Scenes/Games/Pong/Ball.h"
 
 namespace pong {
-Ball::Ball(clay::Scene& scene, float radius)
+Ball::Ball(clay::BaseScene& scene, float radius)
 : clay::Entity(scene), mRadius_(radius) {
     addRenderable(new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("CircularPlane"),

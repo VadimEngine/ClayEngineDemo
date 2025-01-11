@@ -1,11 +1,11 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Galaxy/SunEntity.h"
 
 namespace galaxy {
 
-SunEntity::SunEntity(clay::Scene& scene)
+SunEntity::SunEntity(clay::BaseScene& scene)
     : clay::Entity(scene), mLight_(clay::LightSource::Type::Point) {
     mpRenderable_ = new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("Sphere"),

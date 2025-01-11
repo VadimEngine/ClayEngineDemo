@@ -15,8 +15,15 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 # Define the DEMO_RESOURCE_PATH macro
 target_compile_definitions(${PROJECT_NAME} PRIVATE DEMO_RESOURCE_PATH="${CMAKE_SOURCE_DIR}/res")
 
+set(CLAY_PLATFORM_DESKTOP ON CACHE BOOL "Set Platform to Desktop" FORCE)
+set(CLAY_ENABLE_OPENGL ON CACHE BOOL "Enable OpenGL" FORCE)
+
 # Add ClayEngine as a subdirectory and link to it
 add_subdirectory(${CMAKE_SOURCE_DIR}/ThirdParty/clay clay_build)
+# add_subdirectory(
+#     "C:/Users/Administrator/Desktop/Programing/C++/Earthenware/ClayEngineDemoVR/app/src/ThirdParty/clay"
+#     "${CMAKE_BINARY_DIR}/ClayEngine"
+# )
 target_link_libraries(${PROJECT_NAME} PRIVATE ClayEngine)
 
 # Include project-specific directories

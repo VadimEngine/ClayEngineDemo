@@ -1,5 +1,5 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "Scenes/Games/GamesScene.h"
 #include "Scenes/Games/Vessels/VesselsScene.h"
@@ -10,7 +10,7 @@ namespace vessels {
 
 VesselsSceneGUI::VesselsSceneGUI(VesselsScene& theScene)
     : mScene_(theScene) {
-    mVolume_ = mScene_.getApp().getAudioManger().getGain();
+    mVolume_ = ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().getGain();
 }
 
 VesselsSceneGUI::~VesselsSceneGUI() {}
@@ -206,7 +206,7 @@ void VesselsSceneGUI::buildSettingsPage() {
 
     // Slider
     if (ImGui::SliderFloat("Volume", &mVolume_, 0.f, 1.f)) {
-        mScene_.getApp().getAudioManger().setGain(mVolume_);
+        ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().setGain(mVolume_);
     }
 
 

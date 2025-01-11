@@ -2,9 +2,9 @@
 // standard lib
 #include <vector>
 // ClayEngine
-#include <clay/application/CameraController.h>
-#include <clay/application/Logger.h>
-#include <clay/application/Resource.h>
+#include <clay/application/desktop/CameraController.h>
+#include <clay/utils/common/Logger.h>
+#include <clay/application/common/Resources.h>
 #include <clay/entity/Render/ModelRenderable.h>
 #include <clay/graphics/common/Renderer.h>
 #include <clay/graphics/common/SpriteSheet.h>
@@ -56,20 +56,20 @@ public:
      * On Mouse button press handler
      * @param mouseEvent Mouse event details
      */
-    void onMousePress(const clay::InputHandler::MouseEvent& mouseEvent);
+    void onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent);
 
     /**
      * On Mouse Button release handler
      * @param mouseEvent Mouse event details
      */
-    void onMouseRelease(const clay::InputHandler::MouseEvent& mouseEvent);
+    void onMouseRelease(const clay::IInputHandler::MouseEvent& mouseEvent);
 
     /**
      * @brief Mouse wheel event handler
      *
      * @param mouseEvent Mouse event details
      */
-    void onMouseWheel(const clay::InputHandler::MouseEvent& mouseEvent);
+    void onMouseWheel(const clay::IInputHandler::MouseEvent& mouseEvent);
 
     /**
      * @brief Spawn a unit at a the given grid location
@@ -118,7 +118,7 @@ public:
     /**
      * @brief Get the Scene this object is in. Just Scene for now to avoid circular dependency compile errors
      */
-    clay::Scene& getScene();
+    clay::BaseScene& getScene();
 
 private:
     /** @brief struct to store info on the currently selected entity */
@@ -155,14 +155,14 @@ private:
      *
      * @param mouseEvent Mouse event details
      */
-    void onLeftClick(const clay::InputHandler::MouseEvent& mouseEvent);
+    void onLeftClick(const clay::IInputHandler::MouseEvent& mouseEvent);
 
     /**
      * @brief Helper method to handle left mouse clicks
      *
      * @param mouseEvent Mouse event details
      */
-    void onRightClick(const clay::InputHandler::MouseEvent& mouseEvent);
+    void onRightClick(const clay::IInputHandler::MouseEvent& mouseEvent);
 
     /** Reference to the Scene this game is in */
     TurnStrategyScene& mScene_;

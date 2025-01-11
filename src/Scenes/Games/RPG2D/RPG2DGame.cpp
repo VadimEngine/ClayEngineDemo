@@ -1,5 +1,7 @@
+// third party
+#include <GLFW/glfw3.h>
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "RPG2DScene.h"
 // class
@@ -11,8 +13,8 @@ namespace rpg_2d {
 
 RPG2DGame::RPG2DGame(RPG2DScene& scene, clay::Camera& focusCamera)
 : mScene_(scene), thePlayer(mScene_), theMOB(mScene_),
-    mCameraController_(&focusCamera, mScene_.getApp().getWindow().getInputHandler()),
-    mInputHandler_(mScene_.getApp().getWindow().getInputHandler()) {}
+    mCameraController_(&focusCamera, *(clay::InputHandlerDesktop*)mScene_.getApp().getWindow()->getInputHandler()),
+    mInputHandler_(*(clay::InputHandlerDesktop*)mScene_.getApp().getWindow()->getInputHandler()) {}
 
 RPG2DGame::~RPG2DGame() {}
 
@@ -72,12 +74,12 @@ void RPG2DGame::onKeyPress(unsigned int keyCode) {
 
 void RPG2DGame::onKeyRelease(unsigned int keyCode) {}
 
-void RPG2DGame::onMousePress(const clay::InputHandler::MouseEvent& mouseEvent) {
+void RPG2DGame::onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent) {
     // TODO check if mouse collides with player's collider2
     glm::ivec2 mousePosition = mouseEvent.getPosition();
-    glm::ivec2 screenSize = mScene_.getApp().getWindow().getWindowDimensions(); // get this incase the size changes
+    glm::ivec2 screenSize = mScene_.getApp().getWindow()->getDimensions(); // get this incase the size changes
 
-    mScene_.getApp().getWindow().getWindowDimensions();
+    mScene_.getApp().getWindow()->getDimensions();
     glm::vec3 ray_ndc(
         (2.0f * mousePosition.x) / screenSize.x - 1.0f,
         1.0f - (2.0f * mousePosition.y) / screenSize.y,

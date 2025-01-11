@@ -1,5 +1,7 @@
+// third party
+#include <GLFW/glfw3.h>
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "Scenes/Games/TurnStrategy/TurnStrategyScene.h"
 // class
@@ -8,7 +10,7 @@
 namespace turn_strategy {
 TurnStrategyGame::TurnStrategyGame(TurnStrategyScene& scene)
 : mScene_(scene),
-mCameraController_(mScene_.getFocusCamera(), mScene_.getApp().getWindow().getInputHandler()) {
+mCameraController_(mScene_.getFocusCamera(), *(clay::InputHandlerDesktop*)mScene_.getApp().getWindow()->getInputHandler()) {
     // set camera position
     mScene_.getFocusCamera()->setPosition({5, 5, 11});
     // build sprites
@@ -82,27 +84,27 @@ clay::Entity* TurnStrategyGame::getSelectedEntity() {
     return mSelectedEntity_.selected;
 }
 
-void TurnStrategyGame::onMousePress(const clay::InputHandler::MouseEvent& mouseEvent) {
-    if (mouseEvent.getButton() == clay::InputHandler::MouseEvent::Button::LEFT) {
+void TurnStrategyGame::onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent) {
+    if (mouseEvent.getButton() == clay::IInputHandler::MouseEvent::Button::LEFT) {
         onLeftClick(mouseEvent);
-    } else if (mouseEvent.getButton() == clay::InputHandler::MouseEvent::Button::RIGHT) {
+    } else if (mouseEvent.getButton() == clay::IInputHandler::MouseEvent::Button::RIGHT) {
         onRightClick(mouseEvent);
     }
 }
 
-void TurnStrategyGame::onMouseRelease(const clay::InputHandler::MouseEvent& mouseEvent) {}
+void TurnStrategyGame::onMouseRelease(const clay::IInputHandler::MouseEvent& mouseEvent) {}
 
-void TurnStrategyGame::onMouseWheel(const clay::InputHandler::MouseEvent& mouseEvent) {
+void TurnStrategyGame::onMouseWheel(const clay::IInputHandler::MouseEvent& mouseEvent) {
     clay::Camera& theCamera = *(mCameraController_.getCamera());
 
-    if (mouseEvent.getType() == clay::InputHandler::MouseEvent::Type::SCROLL_UP) {
+    if (mouseEvent.getType() == clay::IInputHandler::MouseEvent::Type::SCROLL_UP) {
         theCamera.move(theCamera.getForward(), 1.f);
         if (theCamera.getPosition().z < mMinCameraDistance_) {
             glm::vec3 newPosition = theCamera.getPosition();
             newPosition.z = mMinCameraDistance_;
             theCamera.setPosition(newPosition);
         }
-    } else if (mouseEvent.getType() == clay::InputHandler::MouseEvent::Type::SCROLL_DOWN) {
+    } else if (mouseEvent.getType() == clay::IInputHandler::MouseEvent::Type::SCROLL_DOWN) {
         theCamera.move(theCamera.getForward(), -1.f);
     }
 }
@@ -183,16 +185,16 @@ void TurnStrategyGame::spawnSettlement(glm::ivec2 tileLocation) {
 void TurnStrategyGame::updateCamera(float dt) {
     clay::Camera& theCamera = *(mCameraController_.getCamera());
 
-    if (mScene_.getApp().getWindow().getInputHandler().isKeyPressed(GLFW_KEY_W)) {
+    if (((clay::InputHandlerDesktop*)(mScene_.getApp().getWindow()->getInputHandler()))->isKeyPressed(GLFW_KEY_W)) {
         theCamera.move(theCamera.getUp(), theCamera.getMoveSpeed() * dt);
     }
-    if (mScene_.getApp().getWindow().getInputHandler().isKeyPressed(GLFW_KEY_S)) {
+    if (((clay::InputHandlerDesktop*)(mScene_.getApp().getWindow()->getInputHandler()))->isKeyPressed(GLFW_KEY_S)) {
         theCamera.move(theCamera.getUp(), -theCamera.getMoveSpeed() * dt);
     }
-    if (mScene_.getApp().getWindow().getInputHandler().isKeyPressed(GLFW_KEY_A)) {
+    if (((clay::InputHandlerDesktop*)(mScene_.getApp().getWindow()->getInputHandler()))->isKeyPressed(GLFW_KEY_A)) {
         theCamera.move(theCamera.getRight(), -theCamera.getMoveSpeed() * dt);
     }
-    if (mScene_.getApp().getWindow().getInputHandler().isKeyPressed(GLFW_KEY_D)) {
+    if (((clay::InputHandlerDesktop*)(mScene_.getApp().getWindow()->getInputHandler()))->isKeyPressed(GLFW_KEY_D)) {
         theCamera.move(theCamera.getRight(), theCamera.getMoveSpeed() * dt);
     }
 }
@@ -230,13 +232,13 @@ const TileMap* TurnStrategyGame::getTileMap() {
     return mpTileMap_.get();
 }
 
-clay::Scene& TurnStrategyGame::getScene() {
+clay::BaseScene& TurnStrategyGame::getScene() {
     return mScene_;
 }
 
-void TurnStrategyGame::onLeftClick(const clay::InputHandler::MouseEvent& mouseEvent) {
+void TurnStrategyGame::onLeftClick(const clay::IInputHandler::MouseEvent& mouseEvent) {
     glm::ivec2 mousePosition = mouseEvent.getPosition();
-    glm::ivec2 screenSize = mScene_.getApp().getWindow().getWindowDimensions(); // get this incase the size changes
+    glm::ivec2 screenSize = mScene_.getApp().getWindow()->getDimensions(); // get this incase the size changes
 
     glm::vec3 ray_ndc(
         (2.0f * mousePosition.x) / screenSize.x - 1.0f,
@@ -270,11 +272,11 @@ void TurnStrategyGame::onLeftClick(const clay::InputHandler::MouseEvent& mouseEv
     }
 }
 
-void TurnStrategyGame::onRightClick(const clay::InputHandler::MouseEvent& mouseEvent) {
+void TurnStrategyGame::onRightClick(const clay::IInputHandler::MouseEvent& mouseEvent) {
     if (mSelectedEntity_.type == EntityType::UNIT) {
         // TODO make a function to calculate mouse ray
         glm::ivec2 mousePosition = mouseEvent.getPosition();
-        glm::ivec2 screenSize = mScene_.getApp().getWindow().getWindowDimensions(); // get this incase the size changes
+        glm::ivec2 screenSize = mScene_.getApp().getWindow()->getDimensions(); // get this incase the size changes
 
 
         glm::vec3 ray_ndc(

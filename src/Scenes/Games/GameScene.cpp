@@ -1,10 +1,10 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Games/GamesScene.h"
 
-GamesScene::GamesScene(clay::App& theApp)
-    : clay::Scene(theApp), mGui_(*this) {}
+GamesScene::GamesScene(clay::IApp& theApp)
+    : clay::BaseScene(theApp), mGui_(*this) {}
 
 GamesScene::~GamesScene() {}
 

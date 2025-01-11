@@ -1,12 +1,12 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Scene2d/Scene2d.h"
 
 namespace scene_2d {
-Scene2d::Scene2d(clay::App& theApp)
-    : clay::Scene(theApp),
-    mCameraController_(getFocusCamera(), mApp_.getWindow().getInputHandler()),
+Scene2d::Scene2d(clay::AppDesktop& theApp)
+    : clay::BaseScene(theApp),
+    mCameraController_(getFocusCamera(), *(clay::InputHandlerDesktop*)(mApp_.getWindow())->getInputHandler()),
     mGui_(*this),
     mSprite1_(*mApp_.getResources().getResource<clay::SpriteSheet>("SpriteSheet1"), glm::ivec2(0, 0)),
     mSprite2_(*mApp_.getResources().getResource<clay::SpriteSheet>("SpriteSheet1"), glm::ivec2(1, 0)) {
@@ -55,7 +55,7 @@ void Scene2d::update(const float dt) {
 }
 
 void Scene2d::render(clay::Renderer& renderer) {
-    mApp_.getRenderer().enableGammaCorrect(false);
+    ((clay::AppDesktop&)mApp_).getRenderer().enableGammaCorrect(false);
     renderer.setCamera(getFocusCamera());
     for (int i = 0; i < mEntities_.size(); ++i) {
         mEntities_[i]->render(renderer);

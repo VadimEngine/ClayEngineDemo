@@ -7,7 +7,7 @@
 #include <glm/gtx/norm.hpp>
 #include <glm/gtx/normalize_dot.hpp>
 // ClayEngine
-#include <clay/application/InputHandler.h>
+#include <clay/application/desktop/InputHandlerDesktop.h>
 #include <clay/entity/render/ModelRenderable.h>
 #include <clay/graphics/common/Renderer.h>
 // project
@@ -105,7 +105,7 @@ private:
     /** Scene this game is in */
     PongScene& mScene_;
     /** Parent App running this game*/
-    clay::App& mApp_;
+    clay::IApp& mApp_;
     /** Left Paddle */
     std::array<std::unique_ptr<Paddle>, 2> mPaddles_;
     /** Game Ball */
@@ -117,7 +117,7 @@ private:
     /** Track what the current game state is */
     GameState mCurrentState_ = GameState::INITIAL;
     /** Reference to input handler of parent App */
-    clay::InputHandler& mInputHandler_;
+    clay::InputHandlerDesktop& mInputHandler_;
 };
 
 } // namespace pong

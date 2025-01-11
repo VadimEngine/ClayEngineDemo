@@ -1,15 +1,15 @@
 #pragma once
 // ClayEngine
-#include <clay/application/Scene.h>
+#include <clay/application/common/BaseScene.h>
 // project
 #include "Scenes/Games/RPG2D/RPG2DGame.h"
 #include "Scenes/Games/RPG2D/RPG2DSceneGUI.h"
 
 namespace rpg_2d {
-class RPG2DScene : public clay::Scene {
+class RPG2DScene : public clay::BaseScene {
 
 public:
-    RPG2DScene(clay::App& theApp);
+    RPG2DScene(clay::IApp& theApp);
 
     /** Destructor */
     ~RPG2DScene();
@@ -43,7 +43,7 @@ public:
      */
     void onKeyRelease(unsigned int code) override;
 
-    void onMousePress(const clay::InputHandler::MouseEvent& mouseEvent);
+    void onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent);
 private:
     RPG2DSceneGUI mGui_;
 

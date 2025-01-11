@@ -1,11 +1,11 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Games/Vessels/VesselsScene.h"
 
 namespace vessels {
-VesselsScene::VesselsScene(clay::App& theApp)
-: clay::Scene(theApp),
+VesselsScene::VesselsScene(clay::IApp& theApp)
+: clay::BaseScene(theApp),
     mGui_(*this) {
     assembleResources();
     mpGame_ = std::make_unique<VesselsGame>(*this);
@@ -26,7 +26,7 @@ void VesselsScene::renderGUI() {
     mGui_.render();
 }
 
-void VesselsScene::onMousePress(const clay::InputHandler::MouseEvent& mouseEvent) {}
+void VesselsScene::onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent) {}
 
 void VesselsScene::assembleResources() {
     std::unique_ptr<clay::Model> rectModel = std::make_unique<clay::Model>();

@@ -1,14 +1,14 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Basic/BasicScene.h"
 
 namespace basic_scene {
-BasicScene::BasicScene(clay::App& theApp)
-    : clay::Scene(theApp),
+BasicScene::BasicScene(clay::IApp& theApp)
+    : clay::BaseScene(theApp),
     mCameraController_(
         getFocusCamera(),
-        mApp_.getWindow().getInputHandler()
+        *(clay::InputHandlerDesktop*)(mApp_.getWindow()->getInputHandler())
     ),
     mGui_(*this),
     mSprite_(*mApp_.getResources().getResource<clay::SpriteSheet>("SpriteSheet1"), glm::ivec2(0, 0)) {

@@ -8,7 +8,7 @@ namespace lighting_scene {
 
 class LightEntity : public clay::Entity {
 public:
-    LightEntity(clay::Scene& scene);
+    LightEntity(clay::BaseScene& scene);
 
     clay::LightSource* getLightSource();
 

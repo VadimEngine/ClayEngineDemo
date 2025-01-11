@@ -18,7 +18,7 @@ public:
     clay::SpriteSheet::Sprite mSprite_;
 
 
-    MOB(clay::Scene& scene);
+    MOB(clay::BaseScene& scene);
 
     ~MOB();
 

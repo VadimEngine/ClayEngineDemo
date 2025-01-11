@@ -1,12 +1,13 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
+#include <clay/utils/desktop/UtilsDesktop.h>
 // class
 #include "Scenes/Games/TurnStrategy/TurnStrategyScene.h"
 
 namespace turn_strategy {
 
-TurnStrategyScene::TurnStrategyScene(clay::App& theApp)
-: clay::Scene(theApp), mGui_(*this) {
+TurnStrategyScene::TurnStrategyScene(clay::IApp& theApp)
+: clay::BaseScene(theApp), mGui_(*this) {
     assembleResources();
     mBackgroundColor_ = {.5,.5,1,1.f};
     mpGame_ = std::make_unique<TurnStrategyGame>(*this);
@@ -15,10 +16,9 @@ TurnStrategyScene::TurnStrategyScene(clay::App& theApp)
 TurnStrategyScene::~TurnStrategyScene() {}
 
 void TurnStrategyScene::assembleResources() {
-    mResources_.loadResource<clay::Texture>(
-        {clay::Resource::RESOURCE_PATH / "World1.png"},
-        "World1"
-    );
+    auto vFileData = clay::Resources::loadFileToMemory((clay::Resources::RESOURCE_PATH / "World1.png").string());
+    auto imageData = clay::utils::fileDataToImageData(vFileData);
+    mResources_.addResource(std::move(std::make_unique<clay::Texture>(*((clay::AppDesktop&)mApp_).getGraphicsAPI(), imageData, true)), "World1");
     // Rectangle Plane Model
     std::unique_ptr<clay::Model> rectModel = std::make_unique<clay::Model>();
     rectModel->addSharedMesh(
@@ -32,7 +32,7 @@ void TurnStrategyScene::update(const float dt) {
 }
 
 void TurnStrategyScene::render(clay::Renderer& renderer) {
-    mApp_.getRenderer().enableGammaCorrect(false);
+    ((clay::AppDesktop&)mApp_).getRenderer().enableGammaCorrect(false);
     renderer.setCamera(getFocusCamera());
     mpGame_->render(renderer);
 }
@@ -45,17 +45,17 @@ void TurnStrategyScene::onKeyPress(unsigned int code) {}
 
 void TurnStrategyScene::onKeyRelease(unsigned int code) {}
 
-void TurnStrategyScene::onMousePress(const clay::InputHandler::MouseEvent& mouseEvent) {
+void TurnStrategyScene::onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent) {
     if (!clay::ImGuiComponent::mouseOnGUI()) {
         mpGame_->onMousePress(mouseEvent);
     }
 }
 
-void TurnStrategyScene::onMouseRelease(const clay::InputHandler::MouseEvent& mouseEvent) {
+void TurnStrategyScene::onMouseRelease(const clay::IInputHandler::MouseEvent& mouseEvent) {
     mpGame_->onMouseRelease(mouseEvent);
 }
 
-void TurnStrategyScene::onMouseWheel(const clay::InputHandler::MouseEvent& mouseEvent) {
+void TurnStrategyScene::onMouseWheel(const clay::IInputHandler::MouseEvent& mouseEvent) {
     mpGame_->onMouseWheel(mouseEvent);
 }
 

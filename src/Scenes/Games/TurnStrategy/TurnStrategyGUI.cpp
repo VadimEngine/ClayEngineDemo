@@ -1,5 +1,5 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "Scenes/Games/GamesScene.h"
 #include "Scenes/Games/TurnStrategy/TurnStrategyScene.h"
@@ -9,8 +9,8 @@
 namespace turn_strategy {
 TurnStrategyGUI::TurnStrategyGUI(TurnStrategyScene& theScene)
     : mScene_(theScene) {
-    mVSyncEnabled_ = mScene_.getApp().getWindow().getGLFWSwapInterval();
-    mVolume_ = mScene_.getApp().getAudioManger().getGain();
+    mVSyncEnabled_ = ((clay::WindowDesktop*)mScene_.getApp().getWindow())->getGLFWSwapInterval();
+    mVolume_ = ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().getGain();
     mCameraMode_ = static_cast<int>(mScene_.getFocusCamera()->getMode());
 }
 
@@ -29,10 +29,10 @@ void TurnStrategyGUI::buildImGui() {
     ImGui::Text("Turn Based Strategy Scene 1.0");
     ImGui::Text("FPS: %.1f", double(ImGui::GetIO().Framerate));
     if (ImGui::Checkbox("vSync", &mVSyncEnabled_)) {
-        mScene_.getApp().getWindow().setVSync(mVSyncEnabled_);
+        ((clay::WindowDesktop*)mScene_.getApp().getWindow())->setVSync(mVSyncEnabled_);
     }
     if (ImGui::SliderFloat("Volume", &mVolume_, 0.f, 1.f)) {
-        mScene_.getApp().getAudioManger().setGain(mVolume_);
+        ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().setGain(mVolume_);
     }
     ImGui::Separator();
     buildCameraSection();

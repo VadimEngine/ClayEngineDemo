@@ -1,17 +1,17 @@
 #pragma once
 // ClayEngine
-#include <clay/application/Scene.h>
+#include <clay/application/common/BaseScene.h>
 // project
 #include "Scenes/Menu/MenuGUI.h"
 
 namespace menu_scene {
-class MenuScene : public clay::Scene {
+class MenuScene : public clay::BaseScene {
 public:
     /**
      * Constructor
      * @param theApp Parent app handling this Scene
      */
-    MenuScene(clay::App& theApp);
+    MenuScene(clay::IApp& theApp);
 
     /** Destructor */
     ~MenuScene();

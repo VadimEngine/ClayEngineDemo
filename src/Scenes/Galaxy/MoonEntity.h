@@ -11,7 +11,7 @@ public:
      *
      * @param mScene Scene this entity is in
      */
-    MoonEntity(clay::Scene& theScene);
+    MoonEntity(clay::BaseScene& theScene);
 
     /** Destructor */
     ~MoonEntity();

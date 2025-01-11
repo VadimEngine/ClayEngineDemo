@@ -1,5 +1,5 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "Scenes/Menu/MenuScene.h"
 #include "Scenes/PhysicsScene/PhysicsScene.h"
@@ -9,7 +9,7 @@
 namespace physics_scene {
 PhysicsSceneGUI::PhysicsSceneGUI(PhysicsScene& theScene)
     : mScene_(theScene) {
-    mVSyncEnabled_ = mScene_.getApp().getWindow().getGLFWSwapInterval();
+    mVSyncEnabled_ = ((clay::WindowDesktop*)mScene_.getApp().getWindow())->getGLFWSwapInterval();
     mCameraMode_ = static_cast<int>(mScene_.getFocusCamera()->getMode());
 }
 
@@ -28,7 +28,7 @@ void PhysicsSceneGUI::buildImGui() {
     ImGui::Text("Physics Scene");
     ImGui::Text("FPS: %.1f", double(ImGui::GetIO().Framerate));
     if (ImGui::Checkbox("vSync", &mVSyncEnabled_)) {
-        mScene_.getApp().getWindow().setVSync(mVSyncEnabled_);
+        ((clay::WindowDesktop*)(mScene_.getApp().getWindow()))->setVSync(mVSyncEnabled_);
     }
 
     if (ImGui::Checkbox("Running", &mSceneRunning_)) {

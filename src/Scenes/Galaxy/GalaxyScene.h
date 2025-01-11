@@ -1,8 +1,8 @@
  #pragma once
 // ClayEngine
-#include <clay/application/CameraController.h>
-#include <clay/application/Resource.h>
-#include <clay/application/Scene.h>
+#include <clay/application/desktop/CameraController.h>
+#include <clay/application/common/Resources.h>
+#include <clay/application/common/BaseScene.h>
 #include <clay/entity/Entity.h>
 #include <clay/entity/render/ModelRenderable.h>
 // project
@@ -12,13 +12,13 @@
 #include "Scenes/Galaxy/SunEntity.h"
 
 namespace galaxy {
-class GalaxyScene : public clay::Scene {
+class GalaxyScene : public clay::BaseScene {
 public:
     /**
      * Constructor
      * @param theApp Parent app handling this Scene
      */
-    GalaxyScene(clay::App& theApp);
+    GalaxyScene(clay::IApp& theApp);
 
     /** Destructor */
     ~GalaxyScene();
@@ -51,14 +51,14 @@ public:
     void assembleResources() override;
 
     /** Get this scene resources */
-    clay::Resource& getResources();
+    clay::Resources& getResources();
 
     /**
      * @brief Respond to mouse wheel events
      *
      * @param mouseEvent Mouse Wheel event
      */
-    void onMouseWheel(const clay::InputHandler::MouseEvent& mouseEvent) override;
+    void onMouseWheel(const clay::IInputHandler::MouseEvent& mouseEvent) override;
 
 private:
     /** GUI for this scene*/

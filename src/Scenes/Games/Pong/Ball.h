@@ -12,7 +12,7 @@ public:
      * @param scene Scene this ball is in
      * @param radius Ball radius
      */
-    Ball(clay::Scene& scene, float radius);
+    Ball(clay::BaseScene& scene, float radius);
 
     /** Destructor */
     ~Ball();

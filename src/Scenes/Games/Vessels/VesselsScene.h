@@ -2,15 +2,15 @@
 // standard lib
 #include <memory>
 // ClayEngine
-#include <clay/application/Scene.h>
+#include <clay/application/common/BaseScene.h>
 // project
 #include "Scenes/Games/Vessels/VesselsGame.h"
 #include "Scenes/Games/Vessels/VesselsSceneGUI.h"
 
 namespace vessels {
-class VesselsScene : public clay::Scene {
+class VesselsScene : public clay::BaseScene {
 public:
-    VesselsScene(clay::App& theApp);
+    VesselsScene(clay::IApp& theApp);
 
     /** Destructor */
     ~VesselsScene();
@@ -36,7 +36,7 @@ public:
      * On keyboard key press handler
      * @param newColor key code for pressed key
      */
-    void onMousePress(const clay::InputHandler::MouseEvent& mouseEvent) override;
+    void onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent) override;
 
     /**
      * @brief Loads and builds resources that are used for this scene

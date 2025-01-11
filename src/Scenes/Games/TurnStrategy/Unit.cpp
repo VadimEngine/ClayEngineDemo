@@ -1,5 +1,5 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "Scenes/Games/TurnStrategy/TurnStrategyGame.h"
 // class

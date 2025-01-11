@@ -1,5 +1,7 @@
+// third party
+#include <GLFW/glfw3.h>
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "Scenes/Games/Pong/PongScene.h"
 // class
@@ -13,7 +15,7 @@ const std::string PongGame::kEndMsg = "Game Over! Press Space to Continue";
 PongGame::PongGame(PongScene& scene)
 : mScene_(scene),
     mApp_(mScene_.getApp()),
-    mInputHandler_(mApp_.getWindow().getInputHandler()) {
+    mInputHandler_(*(clay::InputHandlerDesktop*)mApp_.getWindow()->getInputHandler()) {
     mScene_.getFocusCamera()->setMode(clay::Camera::CameraMode::ORTHOGONAL);
     mScene_.getFocusCamera()->setPosition({0,0,1});
 
@@ -85,7 +87,7 @@ void PongGame::render(clay::Renderer& renderer) {
         {1.f, 1.f, 1.f}
     );
 
-    glm::vec2 windowDimension = mApp_.getWindow().getWindowDimensions();
+    glm::vec2 windowDimension = mApp_.getWindow()->getDimensions();
     // Display game state specific text
     std::string renderString;
     if (mCurrentState_ == GameState::INITIAL) {
@@ -186,7 +188,7 @@ void PongGame::handleEntityOverlap() {
                         }
                         // paddle-ball collision
                         if (mEntities_[i] == mBall_.get() || mEntities_[j] == mBall_.get()) {
-                            mApp_.getAudioManger().playSound(mScene_.getApp().getResources().getResource<clay::Audio>("Blip1")->getId());
+                            ((clay::AppDesktop&)mApp_).getAudioManger().playSound(mScene_.getApp().getResources().getResource<clay::Audio>("Blip1")->getId());
                             mBall_->setVelocity(
                                 glm::reflect(mBall_->getVelocity(), glm::normalize( glm::vec3{1,0,0}))
                             );

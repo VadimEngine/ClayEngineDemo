@@ -1,5 +1,7 @@
+// third party
+#include <GLFW/glfw3.h>
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "Scenes/Games/Vessels/VesselsScene.h"
 // class
@@ -9,8 +11,8 @@ namespace vessels {
 
 VesselsGame::VesselsGame(VesselsScene& scene)
     : mScene_(scene),
-    mInputHandler_(mScene_.getApp().getWindow().getInputHandler()),
-    mCameraController_(mScene_.getFocusCamera(), mScene_.getApp().getWindow().getInputHandler()) {
+    mInputHandler_(*(clay::InputHandlerDesktop*) mScene_.getApp().getWindow()->getInputHandler()),
+    mCameraController_(mScene_.getFocusCamera(), *(clay::InputHandlerDesktop*)mScene_.getApp().getWindow()->getInputHandler()) {
     mpPlayer_ = std::make_unique<Player>(*this);
     mpPlayer_->addRenderable(new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("Cube"),

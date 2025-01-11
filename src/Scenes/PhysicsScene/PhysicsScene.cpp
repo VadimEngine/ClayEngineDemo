@@ -1,11 +1,11 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/PhysicsScene/PhysicsScene.h"
 
 namespace physics_scene {
-PhysicsScene::PhysicsScene(clay::App& theApp)
-    : clay::Scene(theApp), mCameraController_(getFocusCamera(), mApp_.getWindow().getInputHandler()), mGui_(*this) {
+PhysicsScene::PhysicsScene(clay::IApp& theApp)
+    : clay::BaseScene(theApp), mCameraController_(getFocusCamera(), *((clay::InputHandlerDesktop*)((clay::WindowDesktop*)mApp_.getWindow())->getInputHandler())), mGui_(*this) {
     assembleResources();
     mBackgroundColor_ = {0,0,0, 1.f};
     getFocusCamera()->setPosition({0,0,5});

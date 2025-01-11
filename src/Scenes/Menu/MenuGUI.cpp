@@ -1,5 +1,5 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "Scenes/Basic/BasicScene.h"
 #include "Scenes/Galaxy/GalaxyScene.h"
@@ -32,7 +32,7 @@ void MenuGUI::buildImGui() {
         mScene_.setRemove(true);
     }
     if (ImGui::Button("Scene 2d")) {
-        mScene_.getApp().setScene(new scene_2d::Scene2d(mScene_.getApp()));
+        mScene_.getApp().setScene(new scene_2d::Scene2d((clay::AppDesktop&)mScene_.getApp()));
         mScene_.setRemove(true);
     }
     if (ImGui::Button("Physics Scene")) {
@@ -49,7 +49,7 @@ void MenuGUI::buildImGui() {
     }
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(1.f, 0.f, 0.f, 0.40f));
     if (ImGui::Button("Exit")) {
-        mScene_.getApp().quit();
+        ((clay::AppDesktop&)mScene_.getApp()).quit();
         mScene_.setRemove(true);
     }
     // Restore the default color

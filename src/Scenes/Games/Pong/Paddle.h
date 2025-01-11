@@ -11,7 +11,7 @@ public:
      * @param scene Scene this Entity is in
      * @param dimension Paddle size scale
      */
-    Paddle(clay::Scene& scene, glm::vec2 dimension);
+    Paddle(clay::BaseScene& scene, glm::vec2 dimension);
 
     /** Destructor */
     ~Paddle();

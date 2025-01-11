@@ -11,7 +11,7 @@ public:
      *
      * @param scene Scene this Entity is in
      */
-    PlanetEntity(clay::Scene& scene);
+    PlanetEntity(clay::BaseScene& scene);
 
     /** Destructor */
     ~PlanetEntity();

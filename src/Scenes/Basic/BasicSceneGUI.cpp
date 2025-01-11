@@ -1,5 +1,5 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // third party
 // project
 #include "Scenes/Basic/BasicScene.h"
@@ -10,7 +10,7 @@
 namespace basic_scene {
 BasicSceneGUI::BasicSceneGUI(BasicScene& theScene)
     : mScene_(theScene) {
-    mVSyncEnabled_ = mScene_.getApp().getWindow().getGLFWSwapInterval();
+    mVSyncEnabled_ = ((clay::WindowDesktop*)(mScene_.getApp().getWindow()))->getGLFWSwapInterval();
     mCameraMode_ = static_cast<int>(mScene_.getFocusCamera()->getMode());
 }
 
@@ -29,7 +29,7 @@ void BasicSceneGUI::buildImGui() {
     ImGui::Text("Basic Scene");
     ImGui::Text("FPS: %.1f", double(ImGui::GetIO().Framerate));
     if (ImGui::Checkbox("vSync", &mVSyncEnabled_)) {
-        mScene_.getApp().getWindow().setVSync(mVSyncEnabled_);
+        ((clay::WindowDesktop*)mScene_.getApp().getWindow())->setVSync(mVSyncEnabled_);
     }
     ImGui::Separator();
     // Camera control

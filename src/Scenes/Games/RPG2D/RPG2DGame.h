@@ -1,7 +1,7 @@
 #pragma once
 // ClayEngine
-#include <clay/application/CameraController.h>
-#include <clay/application/InputHandler.h>
+#include <clay/application/desktop/CameraController.h>
+#include <clay/application/desktop/InputHandlerDesktop.h>
 #include <clay/graphics/common/Renderer.h>
 // project
 #include "Scenes/Games/RPG2D/MOB.h"
@@ -47,7 +47,7 @@ public:
      */
     void onKeyRelease(unsigned int code);
 
-    void onMousePress(const clay::InputHandler::MouseEvent& mouseEvent);
+    void onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent);
 
 private:
     RPG2DScene& mScene_;
@@ -58,7 +58,7 @@ private:
 
     clay::CameraController mCameraController_;
 
-    clay::InputHandler& mInputHandler_;
+    clay::InputHandlerDesktop& mInputHandler_;
 };
 
 } // namespace rpg_2d

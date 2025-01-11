@@ -1,5 +1,5 @@
 // third party
-#include <clay/application/Logger.h>
+#include <clay/utils/common/Logger.h>
 // class
 #include "Scenes/Games/TurnStrategy/TileMap.h"
 

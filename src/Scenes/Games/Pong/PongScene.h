@@ -1,18 +1,18 @@
 #pragma once
 // ClayEngine
-#include <clay/application/Scene.h>
+#include <clay/application/common/BaseScene.h>
 // project
 #include "Scenes/Games/Pong/PongGame.h"
 #include "Scenes/Games/Pong/PongSceneGUI.h"
 
 namespace pong {
-class PongScene : public clay::Scene {
+class PongScene : public clay::BaseScene {
 public:
     /**
      * Constructor
      * @param theApp Parent app handling this Scene
      */
-    PongScene(clay::App& theApp);
+    PongScene(clay::IApp& theApp);
 
     /** Destructor */
     ~PongScene();

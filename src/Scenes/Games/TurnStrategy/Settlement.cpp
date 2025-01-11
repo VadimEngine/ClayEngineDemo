@@ -1,6 +1,6 @@
 // ClayEngine
-#include <clay/application/App.h>
-#include <clay/application/Scene.h>
+#include <clay/application/desktop/AppDesktop.h>
+#include <clay/application/common/BaseScene.h>
 // project
 #include "Scenes/Games/TurnStrategy/TurnStrategyGame.h"
 #include "Scenes/Games/TurnStrategy/TurnStrategyScene.h"

@@ -1,10 +1,10 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Galaxy/MoonEntity.h"
 
 namespace galaxy {
-MoonEntity::MoonEntity(clay::Scene& scene)
+MoonEntity::MoonEntity(clay::BaseScene& scene)
     : clay::Entity(scene) {
     mpRenderable_ = new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("Sphere"),

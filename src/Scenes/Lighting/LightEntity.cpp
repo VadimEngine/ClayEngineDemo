@@ -1,10 +1,10 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Lighting/LightEntity.h"
 
 namespace lighting_scene {
-LightEntity::LightEntity(clay::Scene& scene)
+LightEntity::LightEntity(clay::BaseScene& scene)
 : clay::Entity(scene), mLightSource_(clay::LightSource::Type::Point) {
     mpRenderable_ = new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("Sphere"),

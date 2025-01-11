@@ -1,5 +1,5 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "Scenes/Games/GamesScene.h"
 #include "Scenes/Games/Pong/PongScene.h"
@@ -10,8 +10,8 @@ namespace pong {
 
 PongSceneGUI::PongSceneGUI(PongScene& theScene)
     : mScene_(theScene) {
-    mVSyncEnabled_ = mScene_.getApp().getWindow().getGLFWSwapInterval();
-    mVolume_ = mScene_.getApp().getAudioManger().getGain();
+    mVSyncEnabled_ = ((clay::WindowDesktop*)(mScene_.getApp().getWindow()))->getGLFWSwapInterval();
+    mVolume_ = ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().getGain();
 }
 
 PongSceneGUI::~PongSceneGUI() {}
@@ -30,10 +30,10 @@ void PongSceneGUI::buildImGui() {
     ImGui::Text("Pong Scene");
     ImGui::Text("FPS: %.1f", double(ImGui::GetIO().Framerate));
     if (ImGui::Checkbox("vSync", &mVSyncEnabled_)) {
-        mScene_.getApp().getWindow().setVSync(mVSyncEnabled_);
+        ((clay::WindowDesktop*)((clay::AppDesktop&)mScene_.getApp()).getWindow())->setVSync(mVSyncEnabled_);
     }
     if (ImGui::SliderFloat("Volume", &mVolume_, 0.f, 1.f)) {
-        mScene_.getApp().getAudioManger().setGain(mVolume_);
+        ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().setGain(mVolume_);
     }
 
     ImGui::Text("Controls:");

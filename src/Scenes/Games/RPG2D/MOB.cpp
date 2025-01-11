@@ -1,11 +1,11 @@
 // ClayEngine
-#include <clay/application/App.h>
-#include <clay/application/Scene.h>
+#include <clay/application/desktop/AppDesktop.h>
+#include <clay/application/common/BaseScene.h>
 // class
 #include "Scenes/Games/RPG2D/MOB.h"
 
 namespace rpg_2d {
-MOB::MOB(clay::Scene& scene)
+MOB::MOB(clay::BaseScene& scene)
 : clay::Entity(scene), mSprite_(*mScene_.getApp().getResources().getResource<clay::SpriteSheet>("SpriteSheet1"), {0,0}) {
     addRenderable(new clay::SpriteRenderable(&mSprite_));
     mpCollider_ = addPhysicsComponent<clay::Collider2>();

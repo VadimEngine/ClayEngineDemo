@@ -1,12 +1,12 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Galaxy/GalaxyScene.h"
 
 namespace galaxy {
 
-GalaxyScene::GalaxyScene(clay::App& theApp)
-    : clay::Scene(theApp), mGui_(*this), mCameraController_(getFocusCamera(), mApp_.getWindow().getInputHandler()) {
+GalaxyScene::GalaxyScene(clay::IApp& theApp)
+    : clay::BaseScene(theApp), mGui_(*this), mCameraController_(getFocusCamera(), *(clay::InputHandlerDesktop*)mApp_.getWindow()->getInputHandler()) {
     getFocusCamera()->setPosition({0,2,10});
     assembleResources();
     // sun
@@ -93,7 +93,7 @@ void GalaxyScene::update(const float dt) {
 }
 
 void GalaxyScene::render(clay::Renderer& renderer) {
-    mApp_.getRenderer().enableGammaCorrect(true);
+    ((clay::AppDesktop&)mApp_).getRenderer().enableGammaCorrect(true);
     renderer.setBloom(true);
     renderer.setLightSources({sunEntity_->getLightSource()});
     renderer.setCamera(getFocusCamera());
@@ -121,7 +121,7 @@ MoonEntity* GalaxyScene::getMoonEntity() {
 
 void GalaxyScene::assembleResources() {
     mResources_.loadResource<clay::Model>(
-        {clay::Resource::RESOURCE_PATH / "Torus.obj"},
+        {clay::Resources::RESOURCE_PATH / "Torus.obj"},
         "Torus"
     );
     std::unique_ptr<clay::Model> sphereModel = std::make_unique<clay::Model>();
@@ -132,14 +132,14 @@ void GalaxyScene::assembleResources() {
     );
 }
 
-clay::Resource& GalaxyScene::getResources() {
+clay::Resources& GalaxyScene::getResources() {
     return mResources_;
 }
 
-void GalaxyScene::onMouseWheel(const clay::InputHandler::MouseEvent& mouseEvent) {
+void GalaxyScene::onMouseWheel(const clay::IInputHandler::MouseEvent& mouseEvent) {
     // Calculate the movement amount based on the scroll amount and the scroll factor
     float movement = 2;
-    if (mouseEvent.getType() == clay::InputHandler::MouseEvent::Type::SCROLL_DOWN) {
+    if (mouseEvent.getType() == clay::IInputHandler::MouseEvent::Type::SCROLL_DOWN) {
         movement*= -1;
     }
 

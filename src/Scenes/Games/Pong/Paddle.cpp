@@ -1,12 +1,12 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // project
 #include "Scenes/Games/Pong/PongScene.h"
 // class
 #include "Scenes/Games/Pong/Paddle.h"
 
 namespace pong {
-Paddle::Paddle(clay::Scene& scene, glm::vec2 dimension)
+Paddle::Paddle(clay::BaseScene& scene, glm::vec2 dimension)
 : clay::Entity(scene) {
     addRenderable(new clay::ModelRenderable(
         mScene_.getResources().getResource<clay::Model>("RectPlane"),

@@ -5,21 +5,21 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 // ClayEngine
-#include <clay/application/CameraController.h>
-#include <clay/application/Scene.h>
+#include <clay/application/desktop/CameraController.h>
+#include <clay/application/common/BaseScene.h>
 #include <clay/entity/physics/RigidBodyComponent.h>
 #include <clay/entity/render/ModelRenderable.h>
 // project
 #include "Scenes/PhysicsScene/PhysicsSceneGUI.h"
 
 namespace physics_scene {
-class PhysicsScene : public clay::Scene {
+class PhysicsScene : public clay::BaseScene {
 public:
     /**
      * Constructor
      * @param theApp Parent app handling this Scene
      */
-    PhysicsScene(clay::App& theApp);
+    PhysicsScene(clay::IApp& theApp);
 
     /** Destructor */
     ~PhysicsScene();

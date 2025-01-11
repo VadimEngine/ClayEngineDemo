@@ -21,7 +21,7 @@ public:
 
     clay::SpriteSheet::Sprite mSprite_;
 
-    Player(clay::Scene& scene);
+    Player(clay::BaseScene& scene);
 
     ~Player();
 

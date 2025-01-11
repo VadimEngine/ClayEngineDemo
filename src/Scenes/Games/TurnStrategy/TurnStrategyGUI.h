@@ -1,6 +1,6 @@
 #pragma once
 // ClayEngine
-#include <clay/gui/ImGuiComponent.h>
+#include <clay/gui/desktop/ImGuiComponent.h>
 
 namespace turn_strategy {
 // Forward declare Scene

@@ -1,12 +1,12 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Games/RPG2D/RPG2DScene.h"
 
 namespace rpg_2d {
 
-RPG2DScene::RPG2DScene(clay::App& theApp)
-    : clay::Scene(theApp), mGui_(*this), mGame_(*this, *getFocusCamera()) {
+RPG2DScene::RPG2DScene(clay::IApp& theApp)
+    : clay::BaseScene(theApp), mGui_(*this), mGame_(*this, *getFocusCamera()) {
     getFocusCamera()->setPosition({0,0,10});
 }
 
@@ -17,7 +17,7 @@ void RPG2DScene::update(const float dt) {
 }
 
 void RPG2DScene::render(clay::Renderer& renderer) {
-    mApp_.getRenderer().enableGammaCorrect(false);
+    ((clay::AppDesktop&)mApp_).getRenderer().enableGammaCorrect(false);
     renderer.setCamera(getFocusCamera());
     mGame_.render(renderer);
 }
@@ -33,7 +33,7 @@ void RPG2DScene::onKeyPress(unsigned int code) {
 void RPG2DScene::onKeyRelease(unsigned int code) {
 }
 
-void RPG2DScene::onMousePress(const clay::InputHandler::MouseEvent& mouseEvent) {
+void RPG2DScene::onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent) {
     mGame_.onMousePress(mouseEvent);
 }
 

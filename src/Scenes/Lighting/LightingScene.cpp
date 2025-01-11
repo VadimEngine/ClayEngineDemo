@@ -1,13 +1,13 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Lighting/LightingScene.h"
 
 namespace lighting_scene {
 
-LightingScene::LightingScene(clay::App& theApp)
-: clay::Scene(theApp),
-    mCameraController_(getFocusCamera(), mApp_.getWindow().getInputHandler()),
+LightingScene::LightingScene(clay::IApp& theApp)
+: clay::BaseScene(theApp),
+    mCameraController_(getFocusCamera(), *(clay::InputHandlerDesktop*)mApp_.getWindow()->getInputHandler()),
     mGui_(*this) {
     assembleResources();
 
@@ -50,7 +50,7 @@ LightingScene::~LightingScene() {}
  * @param dt Time since last update in seconds
  */
 void LightingScene::update(const float dt) {
-    mApp_.getRenderer().enableGammaCorrect(true);
+    ((clay::AppDesktop&)mApp_).getRenderer().enableGammaCorrect(true);
     mCameraController_.update(dt);
 }
 

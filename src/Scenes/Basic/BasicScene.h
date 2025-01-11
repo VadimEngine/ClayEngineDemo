@@ -1,7 +1,7 @@
 #pragma once
 // ClayEngine
-#include <clay/application/CameraController.h>
-#include <clay/application/Scene.h>
+#include <clay/application/desktop/CameraController.h>
+#include <clay/application/common/BaseScene.h>
 #include <clay/entity/render/ModelRenderable.h>
 #include <clay/entity/render/SpriteRenderable.h>
 #include <clay/entity/render/TextRenderable.h>
@@ -11,13 +11,13 @@
 #include "Scenes/Basic/BasicSceneGUI.h"
 
 namespace basic_scene {
-class BasicScene : public clay::Scene {
+class BasicScene : public clay::BaseScene {
 public:
     /**
      * Constructor
      * @param theApp Parent app handling this Scene
      */
-    BasicScene(clay::App& theApp);
+    BasicScene(clay::IApp& theApp);
 
     /** Destructor */
     ~BasicScene();

@@ -1,12 +1,12 @@
 // clay engine
-#include <clay/application/App.h>
-#include <clay/application/Scene.h>
+#include <clay/application/desktop/AppDesktop.h>
+#include <clay/application/common/BaseScene.h>
 // class
 #include "Scenes/Games/RPG2D/Player.h"
 
 namespace rpg_2d {
 
-Player::Player(clay::Scene& scene)
+Player::Player(clay::BaseScene& scene)
 : clay::Entity(scene), mSprite_(*mScene_.getApp().getResources().getResource<clay::SpriteSheet>("SpriteSheet1"), glm::ivec2(3, 0)) {
     addRenderable(new clay::SpriteRenderable(&mSprite_));
     mpCollider_ = addPhysicsComponent<clay::Collider2>();

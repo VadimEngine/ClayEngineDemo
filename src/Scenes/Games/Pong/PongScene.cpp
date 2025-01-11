@@ -1,11 +1,11 @@
 // ClayEngine
-#include <clay/application/App.h>
+#include <clay/application/desktop/AppDesktop.h>
 // class
 #include "Scenes/Games/Pong/PongScene.h"
 
 namespace pong {
-PongScene::PongScene(clay::App& theApp)
-: clay::Scene(theApp), mGui_(*this) {
+PongScene::PongScene(clay::IApp& theApp)
+: clay::BaseScene(theApp), mGui_(*this) {
     assembleResources();
     mpGame_ = std::make_unique<PongGame>(*this);
 }
