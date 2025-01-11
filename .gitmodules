@@ -1,3 +1,3 @@
-[submodule "ThirdParty/clay"]
-	path = ThirdParty/clay
-	url = https://github.com/VadimEngine/ClayEngine.git
+[submodule "thirdparty/clay"]
+	path = thirdparty/clay
+	url = https://github.com/VadimEngine/ClayEngine
