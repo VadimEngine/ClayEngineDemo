@@ -90,6 +90,7 @@ void BasicSceneGUI::buildEntitySection() {
     if (mSelectedEntityIndex_ < mScene_.getEntities().size()) {
         // Display selected Entity details/controls
         clay::Entity* selectedEntity = mScene_.getEntities()[mSelectedEntityIndex_].get();
+        mScene_.setHighLightEntity(selectedEntity);
 
         float entityPosition[3] = {
             selectedEntity->getPosition().x,

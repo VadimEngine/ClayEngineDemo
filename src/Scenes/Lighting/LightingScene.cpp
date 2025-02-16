@@ -59,6 +59,8 @@ void LightingScene::update(const float dt) {
  * @param renderer Rendering helper
  */
 void LightingScene::render(clay::Renderer& renderer) {
+    mApp_.getGraphicsAPI()->bindFrameBuffer(clay::IGraphicsAPI::FrameBufferTarget::FRAMEBUFFER, renderer.getHDRFBO());
+
     renderer.setBloom(true);
     renderer.setCamera(getFocusCamera());
     renderer.setLightSources({mpLight_->getLightSource()});
@@ -66,6 +68,7 @@ void LightingScene::render(clay::Renderer& renderer) {
         mEntities_[i]->render(renderer);
     }
     renderer.setBloom(false);
+    renderer.renderHDR();
 }
 
 void LightingScene::renderGUI() {

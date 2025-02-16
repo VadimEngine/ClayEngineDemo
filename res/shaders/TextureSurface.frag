@@ -34,9 +34,9 @@ void main() {
         vec4 sampledColor = texture(uTexture, subImageCoords);
 
         if (length(sampledColor.rgb - magenta1) < epsilon || length(sampledColor.rgb - magenta2) < epsilon) {
-            discard; // Discard fragment if spritesheet background color
+            FragColor = vec4(0.0, 0.0, 0.0, 0.0); // background color
+        } else {
+            FragColor = sampledColor * uColor;
         }
-
-        FragColor = sampledColor * uColor;
     }
 }

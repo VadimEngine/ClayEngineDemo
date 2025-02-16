@@ -93,6 +93,9 @@ void GalaxyScene::update(const float dt) {
 }
 
 void GalaxyScene::render(clay::Renderer& renderer) {
+    // TODO maybe graphics API should be in renderer
+    mApp_.getGraphicsAPI()->bindFrameBuffer(clay::IGraphicsAPI::FrameBufferTarget::FRAMEBUFFER, renderer.getHDRFBO());
+    
     ((clay::AppDesktop&)mApp_).getRenderer().enableGammaCorrect(true);
     renderer.setBloom(true);
     renderer.setLightSources({sunEntity_->getLightSource()});
@@ -101,6 +104,7 @@ void GalaxyScene::render(clay::Renderer& renderer) {
         mEntities_[i]->render(renderer);
     }
     renderer.setBloom(false);
+    renderer.renderHDR();
 }
 
 void GalaxyScene::renderGUI() {

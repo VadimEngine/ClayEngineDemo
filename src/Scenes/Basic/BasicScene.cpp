@@ -1,3 +1,12 @@
+// third party
+#include "glm/vec2.hpp"
+#include "glm/vec3.hpp"
+#include "glm/mat4x4.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/matrix_inverse.hpp"
+#include "glm/gtc/type_ptr.hpp"
+#include <glm/ext/matrix_transform.hpp>
+#include <glm/gtx/transform.hpp>
 // ClayEngine
 #include <clay/application/desktop/AppDesktop.h>
 // class
@@ -15,32 +24,31 @@ BasicScene::BasicScene(clay::IApp& theApp)
     // load/build resources
     assembleResources();
 
-    mBackgroundColor_ = {.4,.4,.4,1.f};
+    mBackgroundColor_ = {.0,.0,.0,1.f};
     getFocusCamera()->setPosition({0,.1,5});
 
     // First Entity
     {
-        std::unique_ptr<clay::Entity> theEntity1 = std::make_unique<clay::Entity>(*this);
+        std::unique_ptr<clay::Entity> theEntity = std::make_unique<clay::Entity>(*this);
         // Solid cube properties
-        clay::ModelRenderable* solidCubeRenderable = theEntity1->addRenderable<clay::ModelRenderable>();
+        clay::ModelRenderable* solidCubeRenderable = theEntity->addRenderable<clay::ModelRenderable>();
         solidCubeRenderable->setModel(mResources_.getResource<clay::Model>("Cube"));
         solidCubeRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("Assimp"));
 
-        solidCubeRenderable->setWireframeRendering(true);
+        solidCubeRenderable->setWireframeRendering(false);
         solidCubeRenderable->setColor({.3f, .3f, .3f, 1.0f});
         // Set sprite properties
-        clay::SpriteRenderable* spriteRenderable = theEntity1->addRenderable<clay::SpriteRenderable>();
+        clay::SpriteRenderable* spriteRenderable = theEntity->addRenderable<clay::SpriteRenderable>();
         spriteRenderable->setSprite(&mSprite_);
         spriteRenderable->setColor({.3f, 0.f, 0.f, 1.0f});
         spriteRenderable->setPosition({0.f, 1.f, 0.f});
         // First entity properties
-        theEntity1->setPosition({0.f, .5f, 0.f});
-        mEntities_.push_back(std::move(theEntity1));
+        mEntities_.push_back(std::move(theEntity));
     }
     // Second Entity
     {
-        std::unique_ptr<clay::Entity> theEntity2 = std::make_unique<clay::Entity>(*this);
-        clay::ModelRenderable* textureCubeRenderable = theEntity2->addRenderable<clay::ModelRenderable>();
+        std::unique_ptr<clay::Entity> theEntity = std::make_unique<clay::Entity>(*this);
+        clay::ModelRenderable* textureCubeRenderable = theEntity->addRenderable<clay::ModelRenderable>();
         textureCubeRenderable->setModel(mResources_.getResource<clay::Model>("Cube"));
         textureCubeRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("MVPTexShader"));
         // Texture cube properties
@@ -51,8 +59,8 @@ BasicScene::BasicScene(clay::IApp& theApp)
         );
 
         // Second Entity properties
-        theEntity2->setPosition({3.f, .5f, 0.f});
-        mEntities_.push_back(std::move(theEntity2));
+        theEntity->setPosition({3.f, .5f, 0.f});
+        mEntities_.push_back(std::move(theEntity));
     }
     // Third Entity (Floor)
     {
@@ -63,7 +71,7 @@ BasicScene::BasicScene(clay::IApp& theApp)
         // Plane Renderable properties
         floorRenderable->setRotation({-90, 0, 0});
         floorRenderable->setScale({10, 10, 0});
-        floorRenderable->setColor({0.f, 0.f, 0.f, 1.0f});
+        floorRenderable->setColor({0.1f, 0.1f, 0.1f, 1.0f});
         // Add renderable to floor entity
         mEntities_.push_back(std::move(floorEntity));
     }
@@ -100,12 +108,14 @@ BasicScene::BasicScene(clay::IApp& theApp)
         std::unique_ptr<clay::Entity> entity = std::make_unique<clay::Entity>(*this);
         clay::TextRenderable* textRenderable = entity->addRenderable<clay::TextRenderable>();
         textRenderable->setText("TEST STRING");
-        textRenderable->setFont(mApp_.getResources().getResource<clay::Font>("Consolas"));
+        textRenderable->setFont(mApp_.getResources().getResource<clay::Font>("Runescape"));
         textRenderable->setScale({.1f, .1f, 1});
-        textRenderable->setColor({1, 0, 0, 1});
+        textRenderable->setColor({1.0f, 1.0f, 0.0f, 1.0f});
 
         mEntities_.push_back(std::move(entity));
     }
+
+    mHighlightShader_ = mApp_.getResources().getResource<clay::ShaderProgram>("Solid");
 }
 
 BasicScene::~BasicScene() {}
@@ -115,10 +125,44 @@ void BasicScene::update(float dt) {
 }
 
 void BasicScene::render(clay::Renderer& renderer) {
-    renderer.enableGammaCorrect(false);
     renderer.setCamera(getFocusCamera());
-    for (int i = 0; i < mEntities_.size(); ++i) {
-        mEntities_[i]->render(renderer);
+
+    // Restore default stencil settings
+    mApp_.getGraphicsAPI()->stencilMask(0x00);
+
+    // Draw unhighlighted entities normally 
+    for (auto& entity : mEntities_) {
+        if (mHighlightEntity_ == entity.get()) {
+            continue;
+        }
+        entity->render(renderer);
+    }
+
+    if (mHighlightEntity_ != nullptr) {
+        // Enable stencil writing for highlighted objects
+        mApp_.getGraphicsAPI()->stencilFunc(clay::IGraphicsAPI::TestFunction::ALWAYS, 0xFF);
+        mApp_.getGraphicsAPI()->stencilMask(0xFF);
+
+        // Draw highlighted objects normally while also update the stencil buffer
+        mHighlightEntity_->render(renderer);
+
+        // Second pass: draw the outline only where the stencil is not 1
+        mApp_.getGraphicsAPI()->stencilFunc(clay::IGraphicsAPI::TestFunction::NOTEQUAL, 0xFF);
+        mApp_.getGraphicsAPI()->stencilMask(0x00);
+
+        mHighlightShader_->bind();
+        mHighlightShader_->setMat4("uScaleMat", glm::scale(glm::mat4(1.0f), {1.1f, 1.1f, 1.1f}));
+        mHighlightShader_->setVec4("uSolidColor", {1.0f, 1.0f, 0.0f, 1.0f});
+
+        // Render the highlight
+        mHighlightEntity_->render(renderer, *mHighlightShader_);
+
+        // Restore default stencil and depth settings
+        glStencilMask(0xFF);
+        glStencilFunc(GL_ALWAYS, 0, 0xFF);
+
+        mApp_.getGraphicsAPI()->stencilFunc(clay::IGraphicsAPI::TestFunction::ALWAYS, 0xFF);
+        mApp_.getGraphicsAPI()->stencilMask(0xFF);
     }
 }
 
@@ -150,4 +194,9 @@ void BasicScene::assembleResources() {
 std::vector<std::unique_ptr<clay::Entity>>& BasicScene::getEntities() {
     return mEntities_;
 }
+
+void BasicScene::setHighLightEntity(clay::Entity* highlight) {
+    mHighlightEntity_ = highlight;
+}
+
 } // namespace basic_scene

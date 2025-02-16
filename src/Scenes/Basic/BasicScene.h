@@ -47,6 +47,8 @@ public:
     /** Get the entities in this scene*/
     std::vector<std::unique_ptr<clay::Entity>>& getEntities();
 
+    void setHighLightEntity(clay::Entity* highlight);
+
 private:
     /** Camera Controller */
     clay::CameraController mCameraController_;
@@ -54,7 +56,11 @@ private:
     BasicSceneGUI mGui_;
     /** Entities rendered in this Scene */
     std::vector<std::unique_ptr<clay::Entity>> mEntities_;
-    /** First Sprite used in this Scene*/
+    /** Sprite used in this Scene*/
     clay::SpriteSheet::Sprite mSprite_;
+
+    clay::ShaderProgram* mHighlightShader_ = nullptr;
+
+    clay::Entity* mHighlightEntity_ = nullptr;
 };
 } // namespace basic_scene

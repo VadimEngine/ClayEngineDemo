@@ -26,8 +26,6 @@ int main() {
     // TODO Load app resources
     theApp.initialize();
     theApp.setScene(new menu_scene::MenuScene(theApp));
-    // inid to create the renderer using the window
-
     // start application
     theApp.run();
 
