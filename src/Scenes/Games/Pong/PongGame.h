@@ -9,7 +9,7 @@
 // ClayEngine
 #include <clay/application/desktop/InputHandlerDesktop.h>
 #include <clay/entity/render/ModelRenderable.h>
-#include <clay/graphics/common/Renderer.h>
+#include <clay/graphics/opengl/GraphicsAPIOpenGL.h>
 // project
 #include "Scenes/Games/Pong/Ball.h"
 #include "Scenes/Games/Pong/Paddle.h"
@@ -41,7 +41,7 @@ public:
      * Render Game
      * @param renderer Rendering Renderer
      */
-    void render(clay::Renderer& renderer);
+    void render(clay::IGraphicsContext& gContext);
 
     /**
      * Update the game based on key inputs

@@ -10,7 +10,7 @@ namespace turn_strategy {
 TurnStrategyGUI::TurnStrategyGUI(TurnStrategyScene& theScene)
     : mScene_(theScene) {
     mVSyncEnabled_ = ((clay::WindowDesktop*)mScene_.getApp().getWindow())->getGLFWSwapInterval();
-    mVolume_ = ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().getGain();
+    mVolume_ = mScene_.getApp().getAudioManager().getGain();
     mCameraMode_ = static_cast<int>(mScene_.getFocusCamera()->getMode());
 }
 
@@ -32,7 +32,7 @@ void TurnStrategyGUI::buildImGui() {
         ((clay::WindowDesktop*)mScene_.getApp().getWindow())->setVSync(mVSyncEnabled_);
     }
     if (ImGui::SliderFloat("Volume", &mVolume_, 0.f, 1.f)) {
-        ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().setGain(mVolume_);
+        mScene_.getApp().getAudioManager().setGain(mVolume_);
     }
     ImGui::Separator();
     buildCameraSection();

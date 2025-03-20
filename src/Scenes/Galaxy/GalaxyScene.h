@@ -33,7 +33,7 @@ public:
      * Render this scene
      * @param renderer Rendering helper
      */
-    void render(clay::Renderer& renderer) override;
+    void render(clay::IGraphicsContext& gContext) override;
 
     /**
      * Render just the gui for this scene
@@ -53,12 +53,14 @@ public:
     /** Get this scene resources */
     clay::Resources& getResources();
 
+    void onInputEvent(clay::InputEvent& e) override;
+
     /**
      * @brief Respond to mouse wheel events
      *
      * @param mouseEvent Mouse Wheel event
      */
-    void onMouseWheel(const clay::IInputHandler::MouseEvent& mouseEvent) override;
+    void onMouseWheel(const clay::MouseEvent& mouseEvent);
 
 private:
     /** GUI for this scene*/

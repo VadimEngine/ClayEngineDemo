@@ -50,10 +50,10 @@ void PhysicsScene::update(const float dt) {
     handleEntityOverlap();
 }
 
-void PhysicsScene::render(clay::Renderer& renderer) {
-    renderer.setCamera(getFocusCamera());
+void PhysicsScene::render(clay::IGraphicsContext& gContext) {
+    ((clay::AppDesktop&)mApp_).getRenderer().setCamera(getFocusCamera());
     for (int i = 0; i < mEntities_.size(); ++i) {
-        mEntities_[i]->render(renderer);
+        mEntities_[i]->render(gContext);
     }
 }
 

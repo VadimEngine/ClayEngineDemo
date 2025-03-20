@@ -11,7 +11,7 @@ PlanetEntity::PlanetEntity(clay::BaseScene& scene)
         mScene_.getApp().getResources().getResource<clay::ShaderProgram>("AssimpLight")
     );
     mpRenderable_->setScale({mRadius_, mRadius_, mRadius_});
-    mpRenderable_->setRotation({0, 0, 20});
+    mpRenderable_->setOrientation(glm::angleAxis(glm::radians(20.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
 
     mpRenderable_->setColor(0x00FF00FF);
     // Add Renderable to Entity

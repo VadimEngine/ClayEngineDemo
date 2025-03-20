@@ -58,13 +58,13 @@ TileMap::TileMap(clay::Texture* texture, clay::SpriteSheet* spriteSheet) {
 
 TileMap::~TileMap() {}
 
-void TileMap::render(const clay::Renderer& theRenderer) {
+void TileMap::render(clay::IGraphicsContext& gContext) {
     for (int y = 0; y < mTiles_.size(); ++y) {
         for (int x = 0; x < mTiles_[0].size(); ++x) {
             glm::vec3 position = {x, y, 0};
             glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), position);
             if (mTiles_[y][x].sprite != nullptr) {
-                theRenderer.renderSprite(*(mTiles_[y][x].sprite), translationMatrix, {1,1,1,1});
+                gContext.renderer.renderSprite(*(mTiles_[y][x].sprite), translationMatrix, {1,1,1,1});
             }
         }
     }

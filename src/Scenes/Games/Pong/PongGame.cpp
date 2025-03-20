@@ -72,14 +72,14 @@ void PongGame::update(const float dt) {
     handleEntityOverlap();
 }
 
-void PongGame::render(clay::Renderer& renderer) {
+void PongGame::render(clay::IGraphicsContext& gContext) {
     for (const auto& entity: mEntities_) {
-        entity->render(renderer);
+        entity->render(gContext);
     }
     // Display Game title
     // set camera to not update when rendering the text
-    renderer.setCamera(nullptr);
-    renderer.renderText(
+    ((clay::AppDesktop&)mApp_).getRenderer().setCamera(nullptr);
+    ((clay::AppDesktop&)mApp_).getRenderer().renderText(
         "PONG",
         {350.0f, 500.0f},
         *(mApp_.getResources().getResource<clay::Font>("Consolas")),
@@ -99,7 +99,7 @@ void PongGame::render(clay::Renderer& renderer) {
     } else if (mCurrentState_ == GameState::END) {
         renderString = kEndMsg;
     }
-    renderer.renderTextCentered(
+    ((clay::AppDesktop&)mApp_).getRenderer().renderTextCentered(
         renderString,
         {windowDimension.x/2.f, 400.0f},
         *(mApp_.getResources().getResource<clay::Font>("Consolas")),
@@ -109,7 +109,7 @@ void PongGame::render(clay::Renderer& renderer) {
     // render scores in addition to message
     if (mCurrentState_ == GameState::END) {
         std::string playMsg = std::to_string(mScores_[0]) + ":" + std::to_string(mScores_[1]);
-        renderer.renderTextCentered(
+        ((clay::AppDesktop&)mApp_).getRenderer().renderTextCentered(
             playMsg,
             {windowDimension.x/2.f, 350.0f},
             *(mApp_.getResources().getResource<clay::Font>("Consolas")),
@@ -188,8 +188,8 @@ void PongGame::handleEntityOverlap() {
                         }
                         // paddle-ball collision
                         if (mEntities_[i] == mBall_.get() || mEntities_[j] == mBall_.get()) {
-                            if (((clay::AppDesktop&)mApp_).getAudioManger().isInitialized()) {
-                                ((clay::AppDesktop&)mApp_).getAudioManger().playSound(mScene_.getApp().getResources().getResource<clay::Audio>("Blip1")->getId());
+                            if (mApp_.getAudioManager().isInitialized()) {
+                                mApp_.getAudioManager().playSound(mScene_.getApp().getResources().getResource<clay::Audio>("Blip1")->getId());
                             }
                             mBall_->setVelocity(
                                 glm::reflect(mBall_->getVelocity(), glm::normalize( glm::vec3{1,0,0}))

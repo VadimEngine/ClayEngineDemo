@@ -1,4 +1,4 @@
-#version 330 core
+#version 450 core
 layout (location = 0) out vec4 FragColor;
 layout (location = 1) out vec4 BloomColor;
 
@@ -9,7 +9,7 @@ in vec3 Normal;
 #define MAX_LIGHTS 16
 
 // vec4 for padding
-layout(std140) uniform LightBuffer {
+layout(std140, binding = 1) uniform LightBuffer {
     vec4 numLights;
     vec4 lightPositions[MAX_LIGHTS];
     vec4 lightColors[MAX_LIGHTS];

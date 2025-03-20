@@ -92,16 +92,17 @@ void GalaxyScene::update(const float dt) {
     }
 }
 
-void GalaxyScene::render(clay::Renderer& renderer) {
-    // TODO maybe graphics API should be in renderer
+void GalaxyScene::render(clay::IGraphicsContext& gContext) {
+    clay::RendererOpenGL renderer = ((clay::AppDesktop&)mApp_).getRenderer();
+
     mApp_.getGraphicsAPI()->bindFrameBuffer(clay::IGraphicsAPI::FrameBufferTarget::FRAMEBUFFER, renderer.getHDRFBO());
     
-    ((clay::AppDesktop&)mApp_).getRenderer().enableGammaCorrect(true);
+    renderer.enableGammaCorrect(true);
     renderer.setBloom(true);
     renderer.setLightSources({sunEntity_->getLightSource()});
     renderer.setCamera(getFocusCamera());
     for (int i = 0; i < mEntities_.size(); ++i) {
-        mEntities_[i]->render(renderer);
+        mEntities_[i]->render(gContext);
     }
     renderer.setBloom(false);
     renderer.renderHDR();
@@ -125,7 +126,7 @@ MoonEntity* GalaxyScene::getMoonEntity() {
 
 void GalaxyScene::assembleResources() {
     mResources_.loadResource<clay::Model>(
-        {clay::Resources::RESOURCE_PATH / "Torus.obj"},
+        {(clay::Resources::RESOURCE_PATH / "models" /"Torus.obj").string()},
         "Torus"
     );
     std::unique_ptr<clay::Model> sphereModel = std::make_unique<clay::Model>();
@@ -140,10 +141,17 @@ clay::Resources& GalaxyScene::getResources() {
     return mResources_;
 }
 
-void GalaxyScene::onMouseWheel(const clay::IInputHandler::MouseEvent& mouseEvent) {
+void GalaxyScene::onInputEvent(clay::InputEvent& e) {
+    if (e.type_ == clay::InputEvent::EventType::MOUSE && 
+        (((clay::MouseEvent&)e).getType() == clay::MouseEvent::Type::SCROLL_UP || ((clay::MouseEvent&)e).getType() == clay::MouseEvent::Type::SCROLL_DOWN)) {
+        onMouseWheel(((clay::MouseEvent&)e));
+    }
+}
+
+void GalaxyScene::onMouseWheel(const clay::MouseEvent& mouseEvent) {
     // Calculate the movement amount based on the scroll amount and the scroll factor
     float movement = 2;
-    if (mouseEvent.getType() == clay::IInputHandler::MouseEvent::Type::SCROLL_DOWN) {
+    if (mouseEvent.getType() == clay::MouseEvent::Type::SCROLL_DOWN) {
         movement*= -1;
     }
 

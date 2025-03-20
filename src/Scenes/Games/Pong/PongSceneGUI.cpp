@@ -11,7 +11,7 @@ namespace pong {
 PongSceneGUI::PongSceneGUI(PongScene& theScene)
     : mScene_(theScene) {
     mVSyncEnabled_ = ((clay::WindowDesktop*)(mScene_.getApp().getWindow()))->getGLFWSwapInterval();
-    mVolume_ = ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().getGain();
+    mVolume_ = mScene_.getApp().getAudioManager().getGain();
 }
 
 PongSceneGUI::~PongSceneGUI() {}
@@ -33,7 +33,7 @@ void PongSceneGUI::buildImGui() {
         ((clay::WindowDesktop*)((clay::AppDesktop&)mScene_.getApp()).getWindow())->setVSync(mVSyncEnabled_);
     }
     if (ImGui::SliderFloat("Volume", &mVolume_, 0.f, 1.f)) {
-        ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().setGain(mVolume_);
+       mScene_.getApp().getAudioManager().setGain(mVolume_);
     }
 
     ImGui::Text("Controls:");

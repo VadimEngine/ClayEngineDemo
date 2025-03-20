@@ -11,7 +11,7 @@ namespace rpg_2d {
 RPG2DSceneGUI::RPG2DSceneGUI(RPG2DScene& theScene)
     : mScene_(theScene) {
     mVSyncEnabled_ = ((clay::WindowDesktop*)((clay::AppDesktop&)mScene_.getApp()).getWindow())->getGLFWSwapInterval();
-    mVolume_ = ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().getGain();
+    mVolume_ = mScene_.getApp().getAudioManager().getGain();
 }
 
 RPG2DSceneGUI::~RPG2DSceneGUI() {}
@@ -32,7 +32,7 @@ void RPG2DSceneGUI::buildImGui() {
         ((clay::WindowDesktop*)((clay::AppDesktop&)mScene_.getApp()).getWindow())->setVSync(mVSyncEnabled_);
     }
     if (ImGui::SliderFloat("Volume", &mVolume_, 0.f, 1.f)) {
-        ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().setGain(mVolume_);
+        mScene_.getApp().getAudioManager().setGain(mVolume_);
     }
 
     ImGui::End();

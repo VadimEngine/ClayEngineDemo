@@ -36,13 +36,13 @@ void RPG2DGame::update(const float dt) {
     theMOB.update(dt);
 }
 
-void RPG2DGame::render(clay::Renderer& theRenderer) {
-    thePlayer.render(theRenderer);
+void RPG2DGame::render(clay::IGraphicsContext& gContext) {
+    thePlayer.render(gContext);
 
-    theMOB.render(theRenderer);
-    theMOB.getCollider().render(theRenderer);
+    theMOB.render(gContext);
+    theMOB.getCollider().render(gContext);
     // draw player collider for debugging
-    theRenderer.renderText(
+    ((clay::AppDesktop&)mScene_.getApp()).getRenderer().renderText(
         "RPG",
         {350.0f, 500.0f},
         *(mScene_.getApp().getResources().getResource<clay::Font>("Consolas")),
@@ -74,7 +74,7 @@ void RPG2DGame::onKeyPress(unsigned int keyCode) {
 
 void RPG2DGame::onKeyRelease(unsigned int keyCode) {}
 
-void RPG2DGame::onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent) {
+void RPG2DGame::onMousePress(const clay::MouseEvent& mouseEvent) {
     // TODO check if mouse collides with player's collider2
     glm::ivec2 mousePosition = mouseEvent.getPosition();
     glm::ivec2 screenSize = mScene_.getApp().getWindow()->getDimensions(); // get this incase the size changes

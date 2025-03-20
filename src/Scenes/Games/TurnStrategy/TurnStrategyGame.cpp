@@ -58,24 +58,25 @@ void TurnStrategyGame::update(const float dt) {
     // draw minimap
 }
 
-void TurnStrategyGame::render(const clay::Renderer& renderer) {
-    mpTileMap_->render(renderer);
-    drawGrid(renderer);
+void TurnStrategyGame::render(clay::IGraphicsContext& gContext) {
+    // TODO might need to glDisable(GL_STENCIL_TEST);
+    mpTileMap_->render(gContext);
+    drawGrid((clay::RendererOpenGL&)gContext.renderer);
 
     // draw settlements
     for (const auto& eachSettlement : mSettlementList_) {
-        eachSettlement->render(renderer);
+        eachSettlement->render(gContext);
         if (eachSettlement.get() == mSelectedEntity_.selected) {
-            eachSettlement->renderHighlight(renderer);
+            eachSettlement->renderHighlight(gContext);
         }
     }
 
     // render units
     for (const auto& eachUnit : mUnitList_) {
-        eachUnit->render(renderer);
+        eachUnit->render(gContext);
         if (eachUnit.get() == mSelectedEntity_.selected) {
-            eachUnit->renderHighlight(renderer);
-            eachUnit->renderValidMoves(renderer);
+            eachUnit->renderHighlight(gContext);
+            eachUnit->renderValidMoves((clay::RendererOpenGL&)gContext.renderer);
         }
     }
 }
@@ -84,27 +85,27 @@ clay::Entity* TurnStrategyGame::getSelectedEntity() {
     return mSelectedEntity_.selected;
 }
 
-void TurnStrategyGame::onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent) {
-    if (mouseEvent.getButton() == clay::IInputHandler::MouseEvent::Button::LEFT) {
+void TurnStrategyGame::onMousePress(const clay::MouseEvent& mouseEvent) {
+    if (mouseEvent.getButton() == clay::MouseEvent::Button::LEFT) {
         onLeftClick(mouseEvent);
-    } else if (mouseEvent.getButton() == clay::IInputHandler::MouseEvent::Button::RIGHT) {
+    } else if (mouseEvent.getButton() == clay::MouseEvent::Button::RIGHT) {
         onRightClick(mouseEvent);
     }
 }
 
-void TurnStrategyGame::onMouseRelease(const clay::IInputHandler::MouseEvent& mouseEvent) {}
+void TurnStrategyGame::onMouseRelease(const clay::MouseEvent& mouseEvent) {}
 
-void TurnStrategyGame::onMouseWheel(const clay::IInputHandler::MouseEvent& mouseEvent) {
+void TurnStrategyGame::onMouseWheel(const clay::MouseEvent& mouseEvent) {
     clay::Camera& theCamera = *(mCameraController_.getCamera());
 
-    if (mouseEvent.getType() == clay::IInputHandler::MouseEvent::Type::SCROLL_UP) {
+    if (mouseEvent.getType() == clay::MouseEvent::Type::SCROLL_UP) {
         theCamera.move(theCamera.getForward(), 1.f);
         if (theCamera.getPosition().z < mMinCameraDistance_) {
             glm::vec3 newPosition = theCamera.getPosition();
             newPosition.z = mMinCameraDistance_;
             theCamera.setPosition(newPosition);
         }
-    } else if (mouseEvent.getType() == clay::IInputHandler::MouseEvent::Type::SCROLL_DOWN) {
+    } else if (mouseEvent.getType() == clay::MouseEvent::Type::SCROLL_DOWN) {
         theCamera.move(theCamera.getForward(), -1.f);
     }
 }
@@ -136,7 +137,7 @@ void TurnStrategyGame::selectEntity(const glm::vec3& mouseOrigin, const glm::vec
     }
 }
 
-void TurnStrategyGame::drawGrid(const clay::Renderer& theRenderer) {
+void TurnStrategyGame::drawGrid(const clay::RendererOpenGL& theRenderer) {
     const float cellWidth = 1.f;
     const float cellHeight = 1.f;
     glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), {0,0,0});
@@ -236,7 +237,7 @@ clay::BaseScene& TurnStrategyGame::getScene() {
     return mScene_;
 }
 
-void TurnStrategyGame::onLeftClick(const clay::IInputHandler::MouseEvent& mouseEvent) {
+void TurnStrategyGame::onLeftClick(const clay::MouseEvent& mouseEvent) {
     glm::ivec2 mousePosition = mouseEvent.getPosition();
     glm::ivec2 screenSize = mScene_.getApp().getWindow()->getDimensions(); // get this incase the size changes
 
@@ -272,7 +273,7 @@ void TurnStrategyGame::onLeftClick(const clay::IInputHandler::MouseEvent& mouseE
     }
 }
 
-void TurnStrategyGame::onRightClick(const clay::IInputHandler::MouseEvent& mouseEvent) {
+void TurnStrategyGame::onRightClick(const clay::MouseEvent& mouseEvent) {
     if (mSelectedEntity_.type == EntityType::UNIT) {
         // TODO make a function to calculate mouse ray
         glm::ivec2 mousePosition = mouseEvent.getPosition();

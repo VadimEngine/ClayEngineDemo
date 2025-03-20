@@ -6,7 +6,7 @@
 #include <clay/utils/common/Logger.h>
 #include <clay/application/common/Resources.h>
 #include <clay/entity/render/ModelRenderable.h>
-#include <clay/graphics/common/Renderer.h>
+#include <clay/graphics/opengl/GraphicsAPIOpenGL.h>
 #include <clay/graphics/common/SpriteSheet.h>
 #include <clay/graphics/common/Texture.h>
 // project
@@ -45,7 +45,7 @@ public:
      * Render Game
      * @param renderer Rendering Renderer
      */
-    void render(const clay::Renderer& renderer);
+    void render(clay::IGraphicsContext& gContext);
 
     /**
      * @brief Get currently select Entity in this game
@@ -56,20 +56,20 @@ public:
      * On Mouse button press handler
      * @param mouseEvent Mouse event details
      */
-    void onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent);
+    void onMousePress(const clay::MouseEvent& mouseEvent);
 
     /**
      * On Mouse Button release handler
      * @param mouseEvent Mouse event details
      */
-    void onMouseRelease(const clay::IInputHandler::MouseEvent& mouseEvent);
+    void onMouseRelease(const clay::MouseEvent& mouseEvent);
 
     /**
      * @brief Mouse wheel event handler
      *
      * @param mouseEvent Mouse event details
      */
-    void onMouseWheel(const clay::IInputHandler::MouseEvent& mouseEvent);
+    void onMouseWheel(const clay::MouseEvent& mouseEvent);
 
     /**
      * @brief Spawn a unit at a the given grid location
@@ -148,21 +148,21 @@ private:
      *
      * @param theRenderer Renderer to render with
      */
-    void drawGrid(const clay::Renderer& theRenderer);
+    void drawGrid(const clay::RendererOpenGL& theRenderer);
 
     /**
      * @brief Helper methods the handle right mouse clicks
      *
      * @param mouseEvent Mouse event details
      */
-    void onLeftClick(const clay::IInputHandler::MouseEvent& mouseEvent);
+    void onLeftClick(const clay::MouseEvent& mouseEvent);
 
     /**
      * @brief Helper method to handle left mouse clicks
      *
      * @param mouseEvent Mouse event details
      */
-    void onRightClick(const clay::IInputHandler::MouseEvent& mouseEvent);
+    void onRightClick(const clay::MouseEvent& mouseEvent);
 
     /** Reference to the Scene this game is in */
     TurnStrategyScene& mScene_;

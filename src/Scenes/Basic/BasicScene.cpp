@@ -9,6 +9,7 @@
 #include <glm/gtx/transform.hpp>
 // ClayEngine
 #include <clay/application/desktop/AppDesktop.h>
+#include <clay/utils/desktop/UtilsDesktop.h>
 // class
 #include "Scenes/Basic/BasicScene.h"
 
@@ -27,6 +28,9 @@ BasicScene::BasicScene(clay::IApp& theApp)
     mBackgroundColor_ = {.0,.0,.0,1.f};
     getFocusCamera()->setPosition({0,.1,5});
 
+    mApp_.getGraphicsAPI()->stencilFunc(clay::IGraphicsAPI::TestFunction::NOTEQUAL, 0xFF);
+    mApp_.getGraphicsAPI()->stencilOp(clay::IGraphicsAPI::StencilAction::KEEP, clay::IGraphicsAPI::StencilAction::KEEP, clay::IGraphicsAPI::StencilAction::REPLACE);
+
     // First Entity
     {
         std::unique_ptr<clay::Entity> theEntity = std::make_unique<clay::Entity>(*this);
@@ -35,7 +39,6 @@ BasicScene::BasicScene(clay::IApp& theApp)
         solidCubeRenderable->setModel(mResources_.getResource<clay::Model>("Cube"));
         solidCubeRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("Assimp"));
 
-        solidCubeRenderable->setWireframeRendering(false);
         solidCubeRenderable->setColor({.3f, .3f, .3f, 1.0f});
         // Set sprite properties
         clay::SpriteRenderable* spriteRenderable = theEntity->addRenderable<clay::SpriteRenderable>();
@@ -69,7 +72,7 @@ BasicScene::BasicScene(clay::IApp& theApp)
         floorRenderable->setModel(mResources_.getResource<clay::Model>("RectPlane"));
         floorRenderable->setShader(getApp().getResources().getResource<clay::ShaderProgram>("Assimp"));
         // Plane Renderable properties
-        floorRenderable->setRotation({-90, 0, 0});
+        floorRenderable->setOrientation(glm::angleAxis(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f)));
         floorRenderable->setScale({10, 10, 0});
         floorRenderable->setColor({0.1f, 0.1f, 0.1f, 1.0f});
         // Add renderable to floor entity
@@ -124,8 +127,8 @@ void BasicScene::update(float dt) {
     mCameraController_.update(dt);
 }
 
-void BasicScene::render(clay::Renderer& renderer) {
-    renderer.setCamera(getFocusCamera());
+void BasicScene::render(clay::IGraphicsContext& gContext) {
+    ((clay::RendererOpenGL&)(gContext.renderer)).setCamera(getFocusCamera());
 
     // Restore default stencil settings
     mApp_.getGraphicsAPI()->stencilMask(0x00);
@@ -135,7 +138,7 @@ void BasicScene::render(clay::Renderer& renderer) {
         if (mHighlightEntity_ == entity.get()) {
             continue;
         }
-        entity->render(renderer);
+        entity->render(gContext);
     }
 
     if (mHighlightEntity_ != nullptr) {
@@ -144,7 +147,7 @@ void BasicScene::render(clay::Renderer& renderer) {
         mApp_.getGraphicsAPI()->stencilMask(0xFF);
 
         // Draw highlighted objects normally while also update the stencil buffer
-        mHighlightEntity_->render(renderer);
+        mHighlightEntity_->render(gContext);
 
         // Second pass: draw the outline only where the stencil is not 1
         mApp_.getGraphicsAPI()->stencilFunc(clay::IGraphicsAPI::TestFunction::NOTEQUAL, 0xFF);
@@ -155,12 +158,9 @@ void BasicScene::render(clay::Renderer& renderer) {
         mHighlightShader_->setVec4("uSolidColor", {1.0f, 1.0f, 0.0f, 1.0f});
 
         // Render the highlight
-        mHighlightEntity_->render(renderer, *mHighlightShader_);
+        mHighlightEntity_->render(gContext, *mHighlightShader_);
 
         // Restore default stencil and depth settings
-        glStencilMask(0xFF);
-        glStencilFunc(GL_ALWAYS, 0, 0xFF);
-
         mApp_.getGraphicsAPI()->stencilFunc(clay::IGraphicsAPI::TestFunction::ALWAYS, 0xFF);
         mApp_.getGraphicsAPI()->stencilMask(0xFF);
     }

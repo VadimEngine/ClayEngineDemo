@@ -100,10 +100,12 @@ void PhysicsSceneGUI::buildEntitySection() {
             selectedEntity->getPosition().y,
             selectedEntity->getPosition().z
         };
+        glm::quat& entityOrientation = selectedEntity->getOrientation();
+        glm::vec3 eulerAngles = glm::eulerAngles(entityOrientation);
         float entityRotation[3] = {
-            selectedEntity->getRotation().x,
-            selectedEntity->getRotation().y,
-            selectedEntity->getRotation().z
+            eulerAngles.x,
+            eulerAngles.y,
+            eulerAngles.z
         };
         float entityScale[3] = {
             selectedEntity->getScale().x,
@@ -127,11 +129,11 @@ void PhysicsSceneGUI::buildEntitySection() {
         }
 
         if (ImGui::SliderFloat3("Rotation##Entity", entityRotation, -10.f, 10.f, "%.2f")) {
-            selectedEntity->setRotation({
-                entityRotation[0],
-                entityRotation[1],
-                entityRotation[2]
-            });
+            selectedEntity->setOrientation( glm::quat(glm::vec3{
+                glm::radians(entityRotation[0]),
+                glm::radians(entityRotation[1]),
+                glm::radians(entityRotation[2])
+            }));
         }
 
         if (ImGui::SliderFloat3("Scale##Entity", entityScale, -10.f, 10.f, "%.2f")) {

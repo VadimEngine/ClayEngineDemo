@@ -27,7 +27,7 @@ int Unit::getMoves() const {
     return mMoves_;
 }
 
-void Unit::renderValidMoves(const clay::Renderer& theRenderer) {
+void Unit::renderValidMoves(const clay::RendererOpenGL& theRenderer) {
     //gather valid tiles first
     std::unordered_set<glm::ivec2, clay::utils::Vec2Hash> validTiles = getMoveableTiles();
 

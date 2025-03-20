@@ -24,9 +24,9 @@ public:
      */
     void update(const float dt) override;
 
-    void render(const clay::Renderer& theRenderer) const override;
+    void render(clay::IGraphicsContext& gContext) const override;
 
-    void renderInMenu(const clay::Renderer& theRenderer, const glm::vec2& guiPosition, const glm::vec3& scale, const glm::vec3& rotation);
+    void renderInMenu(const clay::RendererOpenGL& theRenderer, const glm::vec2& guiPosition, const glm::vec3& scale, const glm::vec3& rotation);
 
     glm::vec3 getForward();
 

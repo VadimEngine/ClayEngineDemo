@@ -4,7 +4,7 @@
 #include <clay/entity/physics/Collider2.h>
 #include <clay/entity/render/BaseRenderable.h>
 #include <clay/entity/render/SpriteRenderable.h>
-#include <clay/graphics/common/Renderer.h>
+#include <clay/graphics/opengl/GraphicsAPIOpenGL.h>
 #include <clay/graphics/common/SpriteSheet.h>
 
 namespace rpg_2d {
@@ -27,7 +27,7 @@ public:
 
     void update(float dt) override;
 
-    void render(const clay::Renderer& theRenderer) const override;
+    void render(clay::IGraphicsContext& gContext) const override;
 
     void move(glm::vec3 direction, float dt);
 

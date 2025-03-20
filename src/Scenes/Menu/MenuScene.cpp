@@ -12,8 +12,9 @@ MenuScene::~MenuScene() {}
 
 void MenuScene::update(const float dt) {}
 
-void MenuScene::render(clay::Renderer& renderer) {
-    renderer.setCamera(getFocusCamera());
+void MenuScene::render(clay::IGraphicsContext& gContext) {
+    // TODO bind a orthographic UBO via camera?
+    ((clay::AppDesktop&)mApp_).getRenderer().setCamera(getFocusCamera());
 }
 
 void MenuScene::renderGUI() {

@@ -17,16 +17,14 @@ void VesselsScene::update(float dt) {
     mpGame_->update(dt);
 }
 
-void VesselsScene::render(clay::Renderer& renderer) {
-    renderer.setCamera(getFocusCamera());
-    mpGame_->render(renderer);
+void VesselsScene::render(clay::IGraphicsContext& gContext) {
+    ((clay::AppDesktop&)mApp_).getRenderer().setCamera(getFocusCamera());
+    mpGame_->render(gContext);
 }
 
 void VesselsScene::renderGUI() {
     mGui_.render();
 }
-
-void VesselsScene::onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent) {}
 
 void VesselsScene::assembleResources() {
     std::unique_ptr<clay::Model> rectModel = std::make_unique<clay::Model>();

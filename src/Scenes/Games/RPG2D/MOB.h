@@ -4,7 +4,7 @@
 #include <clay/entity/render/BaseRenderable.h>
 #include <clay/entity/render/SpriteRenderable.h>
 #include <clay/entity/physics/Collider2.h>
-#include <clay/graphics/common/Renderer.h>
+#include <clay/graphics/opengl/GraphicsAPIOpenGL.h>
 #include <clay/graphics/common/SpriteSheet.h>
 
 namespace rpg_2d {

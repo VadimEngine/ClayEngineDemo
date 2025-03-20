@@ -25,18 +25,12 @@ public:
      * Render this scene
      * @param renderer Rendering helper
      */
-    void render(clay::Renderer& renderer) override;
+    void render(clay::IGraphicsContext& gContext) override;
 
     /**
      * Render just the gui for this scene
      */
     void renderGUI() override;
-
-    /**
-     * On keyboard key press handler
-     * @param newColor key code for pressed key
-     */
-    void onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent) override;
 
     /**
      * @brief Loads and builds resources that are used for this scene

@@ -27,7 +27,9 @@ public:
      * Render this scene
      * @param renderer Rendering helper
      */
-    void render(clay::Renderer& renderer) override;
+    void render(clay::IGraphicsContext& gContext) override;
+
+    void onInputEvent(clay::InputEvent& e) override;
 
     /**
      * Render just the gui for this scene
@@ -41,13 +43,13 @@ public:
      * On keyboard key press handler
      * @param newColor key code for pressed key
      */
-    void onKeyPress(unsigned int code) override;
+    void onKeyPress(unsigned int code);
 
     /**
      * On keyboard key release handler
      * @param newColor key code for released key
      */
-    void onKeyRelease(unsigned int code) override;
+    void onKeyRelease(unsigned int code);
 
     /**
      * @brief Get the game this scene is handling

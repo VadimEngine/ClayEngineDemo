@@ -1,11 +1,11 @@
 // standard lib
 #include <filesystem>
 // ClayEngine
-#include <clay/application/desktop/AppDesktop.h>
 #include <clay/utils/desktop/UtilsDesktop.h>
 #include <clay/gui/desktop/WindowDesktop.h>
 // project
 #include "Scenes/Menu/MenuScene.h"
+#include "DemoApp.h"
 
 int main() {
     LOG_IV("Starting Application from %s", std::filesystem::current_path().string().c_str());
@@ -13,8 +13,9 @@ int main() {
     clay::Resources::RESOURCE_PATH = DEMO_RESOURCE_PATH;
     // Set resource load method to desktop mode
     clay::Resources::loadFileToMemory = clay::utils::loadFileToMemory_desktop; 
+    clay::Resources::loadImageFileToMemory = clay::utils::loadImageFileToMemory_desktop;
 
-    clay::AppDesktop theApp;
+    DemoApp theApp;
 
     // Create Desktop window
     std::unique_ptr<clay::WindowDesktop> pWindow = std::make_unique<clay::WindowDesktop>("ClayEngine Demo", 800, 600);

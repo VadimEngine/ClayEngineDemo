@@ -54,11 +54,11 @@ void Scene2d::update(const float dt) {
     mCameraController_.update(dt);
 }
 
-void Scene2d::render(clay::Renderer& renderer) {
+void Scene2d::render(clay::IGraphicsContext& gContext) {
     ((clay::AppDesktop&)mApp_).getRenderer().enableGammaCorrect(false);
-    renderer.setCamera(getFocusCamera());
+    ((clay::AppDesktop&)mApp_).getRenderer().setCamera(getFocusCamera());
     for (int i = 0; i < mEntities_.size(); ++i) {
-        mEntities_[i]->render(renderer);
+        mEntities_[i]->render(gContext);
     }
 }
 

@@ -52,7 +52,7 @@ public:
      *
      * @param theRenderer Renderer object
      */
-    void renderValidMoves(const clay::Renderer& theRenderer);
+    void renderValidMoves(const clay::RendererOpenGL& theRenderer);
 
     /**
      * @brief Move the unit to a tile and use decrease moves proportionally

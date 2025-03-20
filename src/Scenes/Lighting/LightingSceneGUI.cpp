@@ -96,10 +96,12 @@ void LightingSceneGUI::buildEntitySection() {
             selectedEntity->getPosition().y,
             selectedEntity->getPosition().z
         };
+        glm::quat& entityOrientation = selectedEntity->getOrientation();
+        glm::vec3 eulerAngles = glm::eulerAngles(entityOrientation);
         float entityRotation[3] = {
-            selectedEntity->getRotation().x,
-            selectedEntity->getRotation().y,
-            selectedEntity->getRotation().z
+            eulerAngles.x,
+            eulerAngles.y,
+            eulerAngles.z
         };
         float entityScale[3] = {
             selectedEntity->getScale().x,
@@ -116,11 +118,11 @@ void LightingSceneGUI::buildEntitySection() {
         }
 
         if (ImGui::SliderFloat3("Rotation##Entity", entityRotation, -10.f, 10.f, "%.2f")) {
-            selectedEntity->setRotation({
-                entityRotation[0],
-                entityRotation[1],
-                entityRotation[2]
-            });
+            selectedEntity->setOrientation( glm::quat(glm::vec3{
+                glm::radians(entityRotation[0]),
+                glm::radians(entityRotation[1]),
+                glm::radians(entityRotation[2])
+            }));
         }
 
         if (ImGui::SliderFloat3("Scale##Entity", entityScale, -10.f, 10.f, "%.2f")) {
@@ -178,10 +180,12 @@ void LightingSceneGUI::buildEntitySection() {
                     selectedRenderable->getPosition().y,
                     selectedRenderable->getPosition().z
                 };
+                glm::quat& renderableOrientation = selectedRenderable->getOrientation();
+                glm::vec3 eulerAngles = glm::eulerAngles(entityOrientation);
                 float renderableRotation[3] = {
-                    selectedRenderable->getRotation().x,
-                    selectedRenderable->getRotation().y,
-                    selectedRenderable->getRotation().z
+                    eulerAngles.x,
+                    eulerAngles.y,
+                    eulerAngles.z
                 };
                 float renderableScale[3] = {
                     selectedRenderable->getScale().x,
@@ -213,11 +217,11 @@ void LightingSceneGUI::buildEntitySection() {
                 }
 
                 if (ImGui::SliderFloat3("Rotation##Renderable", renderableRotation, -10.f, 10.f, "%.2f")) {
-                    selectedRenderable->setRotation({
-                        renderableRotation[0],
-                        renderableRotation[1],
-                        renderableRotation[2]
-                    });
+                    selectedRenderable->setOrientation( glm::quat(glm::vec3{
+                        glm::radians(renderableRotation[0]),
+                        glm::radians(renderableRotation[1]),
+                        glm::radians(renderableRotation[2])
+                    }));
                 }
 
                 if (ImGui::SliderFloat3("Scale##Renderable", renderableScale, -10.f, 10.f, "%.2f")) {

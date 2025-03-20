@@ -27,10 +27,10 @@ void Player::update(float dt) {
     // TODO have collider's position match the parent Entity
 }
 
-void Player::render(const clay::Renderer& theRenderer) const {
-    Entity::render(theRenderer);
+void Player::render(clay::IGraphicsContext& gContext) const {
+    Entity::render(gContext);
     // mpCollider_->render(theRenderer, theCamera);
-    mpBoxCollider_->render(theRenderer);
+    mpBoxCollider_->render((clay::RendererOpenGL&)gContext.renderer);
 }
 
 void Player::move(glm::vec3 direction, float dt) {

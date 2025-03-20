@@ -37,9 +37,9 @@ Settlement::Settlement(TurnStrategyGame& theGame, clay::SpriteSheet::Sprite* pSp
 
 void Settlement::update(const float dt) {}
 
-void Settlement::render(const clay::Renderer& theRenderer) const {
+void Settlement::render(clay::IGraphicsContext& gContext) const {
     // Draw Settlement
-    Entity::render(theRenderer);
+    Entity::render(gContext);
 
     // draw border
     const std::array<glm::ivec2, 4> dirs = {{
@@ -53,7 +53,7 @@ void Settlement::render(const clay::Renderer& theRenderer) const {
     glm::mat4 translationMatrix = glm::identity<glm::mat4>();
 
     for (const auto& eachTile : territoryTiles) {
-        borderRenderable.render(theRenderer, glm::translate(glm::mat4(1.0f), {eachTile.x, eachTile.y, 0.f}));
+        borderRenderable.render(gContext, glm::translate(glm::mat4(1.0f), {eachTile.x, eachTile.y, 0.f}));
     }
 }
 

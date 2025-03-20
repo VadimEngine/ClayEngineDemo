@@ -1,8 +1,8 @@
-#version 330 core
+#version 450 core
 
 layout (location = 0) in vec3 aPos;
 
-layout(std140) uniform Camera {
+layout(std140, binding = 0) uniform Camera {
     mat4 view;
     mat4 projection;
 };

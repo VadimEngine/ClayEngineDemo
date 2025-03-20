@@ -2,7 +2,7 @@
 // ClayEngine
 #include <clay/application/desktop/CameraController.h>
 #include <clay/application/desktop/InputHandlerDesktop.h>
-#include <clay/graphics/common/Renderer.h>
+#include <clay/graphics/opengl/GraphicsAPIOpenGL.h>
 // project
 #include "Scenes/Games/RPG2D/MOB.h"
 #include "Scenes/Games/RPG2D/Player.h"
@@ -27,7 +27,7 @@ public:
      * Render Game
      * @param renderer Rendering Renderer
      */
-    void render(clay::Renderer& renderer);
+    void render(clay::IGraphicsContext& gContext);
 
     /**
      * Update the game based on key inputs
@@ -47,7 +47,7 @@ public:
      */
     void onKeyRelease(unsigned int code);
 
-    void onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent);
+    void onMousePress(const clay::MouseEvent& mouseEvent);
 
 private:
     RPG2DScene& mScene_;

@@ -10,8 +10,8 @@ GamesScene::~GamesScene() {}
 
 void GamesScene::update(float dt) {}
 
-void GamesScene::render(clay::Renderer& renderer) {
-    renderer.setCamera(getFocusCamera());
+void GamesScene::render(clay::IGraphicsContext& gContext) {
+    ((clay::AppDesktop&)mApp_).getRenderer().setCamera(getFocusCamera());
 }
 
 void GamesScene::renderGUI() {

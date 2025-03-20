@@ -16,9 +16,9 @@ void PongScene::update(const float dt) {
     mpGame_->update(dt);
 }
 
-void PongScene::render(clay::Renderer& renderer) {
-    renderer.setCamera(getFocusCamera());
-    mpGame_->render(renderer);
+void PongScene::render(clay::IGraphicsContext& gContext) {
+    ((clay::AppDesktop&)mApp_).getRenderer().setCamera(getFocusCamera());
+    mpGame_->render(gContext);
 }
 
 void PongScene::renderGUI() {
@@ -38,6 +38,12 @@ void PongScene::assembleResources() {
         mApp_.getResources().getResource<clay::Mesh>("RectPlane")
     );
     mResources_.addResource(std::move(rectModel), "RectPlane");
+}
+
+void PongScene::onInputEvent(clay::InputEvent& e) {
+    if (e.type_ == clay::InputEvent::EventType::KEY && ((clay::KeyEvent&)e).getType() == clay::KeyEvent::Type::PRESS) {
+        onKeyPress(((clay::KeyEvent&)e).getCode());
+    }
 }
 
 void PongScene::onKeyPress(unsigned int code) {

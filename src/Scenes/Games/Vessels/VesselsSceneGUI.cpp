@@ -10,7 +10,8 @@ namespace vessels {
 
 VesselsSceneGUI::VesselsSceneGUI(VesselsScene& theScene)
     : mScene_(theScene) {
-    mVolume_ = ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().getGain();
+    mVolume_ = mScene_.getApp().getAudioManager().getGain();
+    mCameraMode_ = static_cast<int>(mScene_.getFocusCamera()->getMode());
 }
 
 VesselsSceneGUI::~VesselsSceneGUI() {}
@@ -206,7 +207,7 @@ void VesselsSceneGUI::buildSettingsPage() {
 
     // Slider
     if (ImGui::SliderFloat("Volume", &mVolume_, 0.f, 1.f)) {
-        ((clay::AppDesktop&)mScene_.getApp()).getAudioManger().setGain(mVolume_);
+        mScene_.getApp().getAudioManager().setGain(mVolume_);
     }
 
 

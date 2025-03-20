@@ -30,42 +30,44 @@ public:
      * Render this scene
      * @param renderer Rendering helper
      */
-    void render(clay::Renderer& renderer) override;
+    void render(clay::IGraphicsContext& gContext) override;
 
     /**
      * Render just the gui for this scene
      */
     void renderGUI() override;
 
+    void onInputEvent(clay::InputEvent& e);
+
     /**
      * On keyboard key press handler
      * @param newColor key code for pressed key
      */
-    void onKeyPress(unsigned int code) override;
+    void onKeyPress(unsigned int code);
 
     /**
      * On keyboard key release handler
      * @param newColor key code for released key
      */
-    void onKeyRelease(unsigned int code) override;
+    void onKeyRelease(unsigned int code);
 
     /**
      * On Mouse button press handler
      * @param mouseEvent Mouse event details
      */
-    void onMousePress(const clay::IInputHandler::MouseEvent& mouseEvent) override;
+    void onMousePress(const clay::MouseEvent& mouseEvent);
 
     /**
      * On Mouse Button release handler
      * @param mouseEvent Mouse event details
      */
-    void onMouseRelease(const clay::IInputHandler::MouseEvent& mouseEvent) override;
+    void onMouseRelease(const clay::MouseEvent& mouseEvent);
 
     /**
      * On wheel handler
      * @param mouseEvent Mouse event details
      */
-    void onMouseWheel(const clay::IInputHandler::MouseEvent& mouseEvent) override;
+    void onMouseWheel(const clay::MouseEvent& mouseEvent);
 
     /** Get reference to the game handler in this scene */
     TurnStrategyGame& getGame();

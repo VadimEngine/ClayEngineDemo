@@ -38,7 +38,7 @@ public:
      * @param theRenderer
      * @param theCamera
      */
-    void render(const clay::Renderer& theRenderer) const override;
+    void render(clay::IGraphicsContext& gContext) const override;
 
     /**
      * @brief Update name of this settlement

@@ -30,7 +30,7 @@ public:
      * Render this scene
      * @param renderer Rendering helper
      */
-    void render(clay::Renderer& renderer) override;
+    void render(clay::IGraphicsContext& gContext) override;
 
     /**
      * Render just the gui for this scene

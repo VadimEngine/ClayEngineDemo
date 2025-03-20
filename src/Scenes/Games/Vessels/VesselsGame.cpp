@@ -18,7 +18,7 @@ VesselsGame::VesselsGame(VesselsScene& scene)
         mScene_.getResources().getResource<clay::Model>("Cube"),
         mScene_.getApp().getResources().getResource<clay::ShaderProgram>("Assimp")
     ));
-    mpPlayer_->setPosition({0.f,.5f,0.f});
+    mpPlayer_->setPosition({0.0f, 0.0f,-3.f});
 
     // make floor
     {
@@ -27,7 +27,7 @@ VesselsGame::VesselsGame(VesselsScene& scene)
         floorRenderable->setModel(mScene_.getResources().getResource<clay::Model>("RectPlane"));
         floorRenderable->setShader(mScene_.getApp().getResources().getResource<clay::ShaderProgram>("Assimp"));
         // Plane Renderable properties
-        floorRenderable->setRotation({-90, 0, 0});
+        floorRenderable->setOrientation(glm::angleAxis(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f)));
         floorRenderable->setScale({10, 10, 0});
         floorRenderable->setColor({0.f, 1.f, 0.f, 1.0f});
         // Add renderable to floor entity
@@ -41,11 +41,11 @@ void VesselsGame::update(const float dt) {
     handleKeyUpdate(dt);
 }
 
-void VesselsGame::render(clay::Renderer& renderer) {
+void VesselsGame::render(clay::IGraphicsContext& gContext) {
     if (mState_ == VesselsGame::GameState::CORPOREAL_REALM) {
-        mpPlayer_->render(renderer);
+        mpPlayer_->render(gContext);
         for (const auto& entity: mEntities_) {
-            entity->render(renderer);
+            entity->render(gContext);
         }
     }
 }
@@ -54,15 +54,12 @@ void VesselsGame::handleKeyUpdate(float dt) {
     if (mState_ == VesselsGame::GameState::CORPOREAL_REALM) {
 
         if (mInputHandler_.isKeyPressed(GLFW_KEY_LEFT)) {
-            auto currRot = mpPlayer_->getRotation();
-            currRot += glm::vec3{0,1,0} * dt * 50.f;
-            mpPlayer_->setRotation(currRot);
-
+            auto& currRot = mpPlayer_->getOrientation();
+            currRot *= glm::angleAxis(-glm::radians(-50.0f * dt), glm::vec3(0.0f, 1.0f, 0.0f));
         }
         if (mInputHandler_.isKeyPressed(GLFW_KEY_RIGHT)) {
-            auto currRot = mpPlayer_->getRotation();
-            currRot += glm::vec3{0,-1,0} * dt * 50.f;
-            mpPlayer_->setRotation(currRot);
+            auto& currRot = mpPlayer_->getOrientation();
+            currRot *= glm::angleAxis(-glm::radians(50.0f * dt), glm::vec3(0.0f, 1.0f, 0.0f));
         }
 
         const float speed = 5.f;
@@ -82,7 +79,6 @@ void VesselsGame::handleKeyUpdate(float dt) {
         if (mInputHandler_.isKeyPressed(GLFW_KEY_A)) {
             dir += -mpPlayer_->getRight();
         }
-
 
         if (glm::length(dir) > 0.0f) {
             dir = glm::normalize(dir);

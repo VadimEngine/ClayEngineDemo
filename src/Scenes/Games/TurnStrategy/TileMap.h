@@ -3,7 +3,8 @@
 #include <filesystem>
 #include <vector>
 // ClayEngine
-#include <clay/graphics/common/Renderer.h>
+#include <clay/graphics/common/IGraphicsContext.h>
+#include <clay/graphics/opengl/GraphicsAPIOpenGL.h>
 #include <clay/graphics/common/SpriteSheet.h>
 
 namespace turn_strategy {
@@ -38,7 +39,7 @@ public:
      *
      * @param theRenderer Render object
      */
-    void render(const clay::Renderer& theRenderer);
+    void render(clay::IGraphicsContext& gContext);
 
     /**
      * @brief Get reference to tile at the given position if it is in range

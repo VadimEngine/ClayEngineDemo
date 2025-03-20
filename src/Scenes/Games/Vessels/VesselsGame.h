@@ -37,7 +37,7 @@ public:
      * Render Game
      * @param renderer Rendering Renderer
      */
-    void render(clay::Renderer& renderer);
+    void render(clay::IGraphicsContext& gContext);
 
     /**
      * Update the game based on key inputs// TODO SHOULD THIS BE PRIVATE?

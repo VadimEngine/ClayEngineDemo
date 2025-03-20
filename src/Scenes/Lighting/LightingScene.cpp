@@ -45,27 +45,20 @@ LightingScene::LightingScene(clay::IApp& theApp)
 
 LightingScene::~LightingScene() {}
 
-/**
- * Update the Scene
- * @param dt Time since last update in seconds
- */
 void LightingScene::update(const float dt) {
     ((clay::AppDesktop&)mApp_).getRenderer().enableGammaCorrect(true);
     mCameraController_.update(dt);
 }
 
-/**
- * Render this scene
- * @param renderer Rendering helper
- */
-void LightingScene::render(clay::Renderer& renderer) {
+void LightingScene::render(clay::IGraphicsContext& gContext) {
+    clay::RendererOpenGL& renderer = ((clay::AppDesktop&)mApp_).getRenderer();
     mApp_.getGraphicsAPI()->bindFrameBuffer(clay::IGraphicsAPI::FrameBufferTarget::FRAMEBUFFER, renderer.getHDRFBO());
 
     renderer.setBloom(true);
     renderer.setCamera(getFocusCamera());
     renderer.setLightSources({mpLight_->getLightSource()});
     for (int i = 0; i < mEntities_.size(); ++i) {
-        mEntities_[i]->render(renderer);
+        mEntities_[i]->render(gContext);
     }
     renderer.setBloom(false);
     renderer.renderHDR();
