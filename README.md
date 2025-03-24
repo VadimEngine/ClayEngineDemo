@@ -49,6 +49,15 @@ Verify the library build by running its unit test:
 
 - A simple simulation of a planet and moon orbiting a sun.
 
+### Shader Tool Page
+
+![alt text](./Screenshots/ShaderToolScene.png)
+
+- Shader tool to allow building and editing each stage of a shader for experimenting. 
+- Uniforms can also be added which includes custom uniforms, texture uniforms and system uniforms that copy system variables such as camera view/proj/in_view/in_proj, time, frame. 
+- The mesh to render onto can be chosen and transformed. 
+- The camera can also be moved to see the output render at different angles. 
+
 ### Games Scene
 
 ![alt text](./Screenshots/GamesScene.png)

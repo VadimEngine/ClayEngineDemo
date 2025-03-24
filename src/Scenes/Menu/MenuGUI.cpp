@@ -8,6 +8,7 @@
 #include "Scenes/Menu/MenuScene.h"
 #include "Scenes/PhysicsScene/PhysicsScene.h"
 #include "Scenes/Scene2d/Scene2d.h"
+#include "Scenes/ShaderTool/ShaderToolScene.h"
 // class
 #include "Scenes/Menu/MenuGUI.h"
 
@@ -41,6 +42,10 @@ void MenuGUI::buildImGui() {
     }
     if (ImGui::Button("Galaxy")) {
         mScene_.getApp().setScene(new galaxy::GalaxyScene(mScene_.getApp()));
+        mScene_.setRemove(true);
+    }
+    if (ImGui::Button("Shader Tool")) {
+        mScene_.getApp().setScene(new shader_tool_scene::ShaderToolScene(mScene_.getApp()));
         mScene_.setRemove(true);
     }
     if (ImGui::Button("Games")) {
